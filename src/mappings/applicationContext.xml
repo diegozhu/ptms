@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+    <bean
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <value>classpath:jdbc.properties</value>
+        </property>
+    </bean>
+
+    <bean id="dataSource" destroy-method="close" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+        <property name="initialSize" value="5" />
+    </bean>
+    
+   <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource"><ref bean="dataSource"/></property>
+        <property name="mappingDirectoryLocations">
+            <list>
+                <value>${hibernate.mappingDirectory}</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="txManager"
+        class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <aop:config>
+        <aop:pointcut id="bussinessService"
+            expression="execution(public * com.zhy.action.base.BaseAction.service..*.*(..))" />
+        <aop:advisor pointcut-ref="bussinessService"
+            advice-ref="txAdvice" />
+    </aop:config>
+
+    <tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="save*"  rollback-for="java.lang.Exception" />
+            <tx:method name="*"  rollback-for="java.lang.Exception" />
+        </tx:attributes>
+    </tx:advice>
+
+     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+     <bean name="baseDAO" abstract="true">
+        <property name="hibernateTemplate"><ref local="hibernateTemplate"/></property>
+    </bean>
+    <bean id="baseAction" class="net.diegozhu.j2ee.ptms.action.base.BaseAction" />
+
+    <!--
+     <bean id="userDao" class="com.zhy.dao.impl.UserDao" parent="baseDAO" />
+     <bean id="requestDao" class="com.zhy.dao.impl.RequestDao" parent="baseDAO" />
+     <bean id="requestTypeDao" class="com.zhy.dao.impl.RequestTypeDao" parent="baseDAO" />
+     <bean id="operationDao" class="com.zhy.dao.impl.OperationDao" parent="baseDAO" />
+
+ 
+     <bean id="userService" class="com.zhy.service.impl.UserService" >
+        <property name="userDao" ref="userDao" />
+    </bean>
+    <bean id="requestService" class="com.zhy.service.impl.RequestService">
+        <property name="requestDao" ref="requestDao" />
+        <property name="operationDao" ref="operationDao" />
+    </bean>
+    <bean id="requestTypeService" class="com.zhy.service.impl.RequestTypeService">
+        <property name="requestTypeDao" ref="requestTypeDao" />
+    </bean>
+    <bean id="operationService" class="com.zhy.service.impl.OperationService">
+        <property name="operationDao" ref="operationDao" />
+        <property name="requestDao" ref="requestDao" />
+    </bean>
+ --> 
+   
+
+   <!-- 
+   <bean id="UserAction" class="com.zhy.action.UserAction" scope="prototype" parent="baseAction">
+     <property name="userService" ref="userService"/>
+   </bean> 
+
+   <bean id="RequestTypeAction" class="com.zhy.action.RequestTypeAction" scope="prototype" parent="baseAction">
+     <property name="requestTypeService" ref="requestTypeService"/>
+   </bean> 
+
+    <bean id="RequestAction" class="com.zhy.action.RequestAction" scope="prototype" parent="baseAction">
+        <property name="userService" ref="userService"/>
+        <property name="requestService" ref="requestService"/>
+        <property name="operationService" ref="operationService"/>
+        <property name="requestTypeService" ref="requestTypeService"/>
+    </bean>
+
+    <bean id="LoginAction" class="com.zhy.action.LoginAction" scope="prototype" parent="baseAction">
+        <property name="userService" ref="userService"/>
+    </bean> 
+    <bean id="AjaxAction" class="com.zhy.action.AjaxAction" scope="prototype" parent="baseAction">
+        <property name="userService" ref="userService"/>
+        <property name="requestTypeService" ref="requestTypeService"/>
+    </bean> 
+
+    <bean id="OperationAction" class="com.zhy.action.OperationAction" scope="prototype" parent="baseAction">
+     <property name="userService" ref="userService"/>
+     <property name="requestService" ref="requestService"/>
+     <property name="operationService" ref="operationService"/>
+     <property name="requestTypeService" ref="requestTypeService"/>
+   </bean>
+   <bean id="Configure" class="com.zhy.action.SystemConfigureAction" scope="prototype" parent="baseAction" />
+ -->
+</beans>

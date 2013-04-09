@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 9, 2013 10:23:05 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="net.diegozhu.j2ee.ptms.model.Station" table="station" catalog="ptms">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45" not-null="true" />
+        </property>
+        <property name="createtime" type="string">
+            <column name="createtime" length="45" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="45" />
+        </property>
+        <property name="periority" type="java.lang.Integer">
+            <column name="periority" />
+        </property>
+        <property name="locationX" type="java.lang.Double">
+            <column name="locationX" precision="22" scale="0" />
+        </property>
+        <property name="locationY" type="java.lang.Double">
+            <column name="locationY" precision="22" scale="0" />
+        </property>
+        <property name="availble" type="java.lang.Boolean">
+            <column name="availble" />
+        </property>
+        <set name="lineStations" table="line_station" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="stationid" not-null="true" />
+            </key>
+            <one-to-many class="net.diegozhu.j2ee.ptms.model.LineStation" />
+        </set>
+        <set name="eventses" table="events" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="stationid" />
+            </key>
+            <one-to-many class="net.diegozhu.j2ee.ptms.model.Events" />
+        </set>
+    </class>
+</hibernate-mapping>
