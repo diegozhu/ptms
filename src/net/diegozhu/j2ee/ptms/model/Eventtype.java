@@ -10,6 +10,10 @@ import java.util.Set;
  */
 public class Eventtype implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = 8662645173144452953L;
 	private int id;
 	private String name;
 	private String createtime;

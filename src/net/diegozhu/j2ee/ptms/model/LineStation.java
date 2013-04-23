@@ -7,6 +7,10 @@ package net.diegozhu.j2ee.ptms.model;
  */
 public class LineStation implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = -8189834180916208821L;
 	private LineStationId id;
 	private Station station;
 	private Line line;

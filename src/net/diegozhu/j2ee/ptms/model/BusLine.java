@@ -7,6 +7,10 @@ package net.diegozhu.j2ee.ptms.model;
  */
 public class BusLine implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = -2333926034667032588L;
 	private BusLineId id;
 	private Bus bus;
 	private Line line;

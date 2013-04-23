@@ -11,6 +11,10 @@ import java.util.Set;
  */
 public class Line implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = 2035985403594421208L;
 	private int id;
 	private String name;
 	private String createtime;

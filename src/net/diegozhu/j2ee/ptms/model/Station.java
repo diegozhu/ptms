@@ -10,6 +10,10 @@ import java.util.Set;
  */
 public class Station implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = 9130852038635260030L;
 	private int id;
 	private String name;
 	private String createtime;

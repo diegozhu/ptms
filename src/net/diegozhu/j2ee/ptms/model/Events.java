@@ -7,6 +7,10 @@ package net.diegozhu.j2ee.ptms.model;
  */
 public class Events implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = 8516431294122722395L;
 	private int id;
 	private Bus bus;
 	private Station station;

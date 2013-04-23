@@ -7,6 +7,10 @@ package net.diegozhu.j2ee.ptms.model;
  */
 public class BusStatus implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = -5112063423210473842L;
 	private int id;
 	private Bus bus;
 	private String name;

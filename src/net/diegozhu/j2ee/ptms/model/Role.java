@@ -10,6 +10,10 @@ import java.util.Set;
  */
 public class Role implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = -8661452491926673184L;
 	private int id;
 	private String name;
 	private String createtime;

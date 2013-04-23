@@ -11,6 +11,10 @@ import java.util.Set;
  */
 public class Bus implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = -5504398030244011138L;
 	private int id;
 	private String name;
 	private String createtime;

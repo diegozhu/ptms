@@ -7,6 +7,10 @@ package net.diegozhu.j2ee.ptms.model;
  */
 public class StationStatus implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = 647441663802610446L;
 	private int id;
 	private Line line;
 	private String name;

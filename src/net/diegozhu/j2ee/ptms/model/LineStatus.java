@@ -7,6 +7,10 @@ package net.diegozhu.j2ee.ptms.model;
  */
 public class LineStatus implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+    private static final long serialVersionUID = -5166407868072173794L;
 	private int id;
 	private Line line;
 	private String name;
