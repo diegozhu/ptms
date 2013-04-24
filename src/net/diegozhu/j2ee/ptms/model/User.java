@@ -1,6 +1,5 @@
 package net.diegozhu.j2ee.ptms.model;
 
-// Generated Apr 9, 2013 10:21:55 PM by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.Set;
@@ -15,8 +14,6 @@ import javax.persistence.Table;
 @Table(name="User")
 public class User implements java.io.Serializable {
 
-
-	
     private static final long serialVersionUID = -3536129715928094603L;
     
     @Id
