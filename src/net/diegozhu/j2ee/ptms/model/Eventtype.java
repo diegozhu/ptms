@@ -1,41 +1,52 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
- 
-import java.util.HashSet;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import java.util.Set;
 
 /**
- * Eventtype   */
+ * <br>
+ * table:eventtype<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
+@Entity
+@Table(name = "Eventtype", catalog = "ptms")
 public class Eventtype implements java.io.Serializable {
- 
-    private static final long serialVersionUID = 8662645173144452953L;
-	private int id;
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "createtime")
 	private String createtime;
+
+	@Column(name = "description")
 	private String description;
-	private Set<Events> eventses = new HashSet<Events>(0);
 
-	public Eventtype() {
-	}
-
-	public Eventtype(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	public Eventtype(int id, String name, String createtime,
-			String description, Set<Events> eventses) {
-		this.id = id;
-		this.name = name;
-		this.createtime = createtime;
-		this.description = description;
-		this.eventses = eventses;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -63,12 +74,15 @@ public class Eventtype implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Set<Events> getEventses() {
-		return this.eventses;
+	public String toString() {
+		return "Eventtype:" + this.id + this.name + this.createtime + this.description;
 	}
 
-	public void setEventses(Set<Events> eventses) {
-		this.eventses = eventses;
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
 	}
 
+	public int hashCode() {
+		return this.id;
+	}
 }

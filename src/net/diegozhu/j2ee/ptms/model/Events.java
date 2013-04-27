@@ -1,53 +1,70 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
- 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
- * Events   */
+ * <br>
+ * table:events<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
+@Entity
+@Table(name = "Events", catalog = "ptms")
 public class Events implements java.io.Serializable {
- 
-    private static final long serialVersionUID = 8516431294122722395L;
-	private int id;
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@ManyToOne
+	@JoinColumn(name = "busid")
 	private Bus bus;
+
+	@ManyToOne
+	@JoinColumn(name = "stationid")
 	private Station station;
-	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "eventtypeid")
 	private Eventtype eventtype;
+
+	@ManyToOne
+	@JoinColumn(name = "userid")
+	private User user;
+
+	@ManyToOne
+	@JoinColumn(name = "lineid")
 	private Line line;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "createtime")
 	private String createtime;
+
+	@Column(name = "description")
 	private String description;
-	private int responserid;
 
-	public Events() {
-	}
-
-	public Events(int id, User user, Eventtype eventtype, String name,
-			int responserid) {
-		this.id = id;
-		this.user = user;
-		this.eventtype = eventtype;
-		this.name = name;
-		this.responserid = responserid;
-	}
-
-	public Events(int id, Bus bus, Station station, User user,
-			Eventtype eventtype, Line line, String name, String createtime,
-			String description, int responserid) {
-		this.id = id;
-		this.bus = bus;
-		this.station = station;
-		this.user = user;
-		this.eventtype = eventtype;
-		this.line = line;
-		this.name = name;
-		this.createtime = createtime;
-		this.description = description;
-		this.responserid = responserid;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -67,20 +84,20 @@ public class Events implements java.io.Serializable {
 		this.station = station;
 	}
 
-	public User getUser() {
-		return this.user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public Eventtype getEventtype() {
 		return this.eventtype;
 	}
 
 	public void setEventtype(Eventtype eventtype) {
 		this.eventtype = eventtype;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Line getLine() {
@@ -115,12 +132,15 @@ public class Events implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public int getResponserid() {
-		return this.responserid;
+	public String toString() {
+		return "Events:" + this.id + this.bus + this.station + this.eventtype + this.user + this.line + this.name + this.createtime + this.description;
 	}
 
-	public void setResponserid(int responserid) {
-		this.responserid = responserid;
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
 	}
 
+	public int hashCode() {
+		return this.id;
+	}
 }

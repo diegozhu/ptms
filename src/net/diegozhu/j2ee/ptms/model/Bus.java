@@ -1,52 +1,77 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
- 
-import java.util.Date;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import java.util.Set;
 
 /**
- * Bus   */
+ * <br>
+ * table:bus<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
+@Entity
+@Table(name = "Bus", catalog = "ptms")
 public class Bus implements java.io.Serializable {
- 
-    private static final long serialVersionUID = -5504398030244011138L;
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@ManyToOne
+	@JoinColumn(name = "userid")
+	private User user;
+
 	@Column(name = "name")
 	private String name;
-	@Column(name = "createtime") 
+
+	@Column(name = "createtime")
 	private String createtime;
+
 	@Column(name = "description")
 	private String description;
-	@Column(name = "driver")
-	private User driver;
+
 	@Column(name = "maxpassager")
 	private Integer maxpassager;
+
 	@Column(name = "type")
 	private String type;
+
 	@Column(name = "purchasetime")
-	private Date purchasetime;
+	private String purchasetime;
+
 	@Column(name = "lefttime")
-	private Date lefttime;
+	private String lefttime;
 
-	
-
-	public Bus() {}
-
-	public Bus(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getName() {
@@ -73,8 +98,6 @@ public class Bus implements java.io.Serializable {
 		this.description = description;
 	}
 
-
-
 	public Integer getMaxpassager() {
 		return this.maxpassager;
 	}
@@ -91,30 +114,31 @@ public class Bus implements java.io.Serializable {
 		this.type = type;
 	}
 
-	public Date getPurchasetime() {
+	public String getPurchasetime() {
 		return this.purchasetime;
 	}
 
-	public void setPurchasetime(Date purchasetime) {
+	public void setPurchasetime(String purchasetime) {
 		this.purchasetime = purchasetime;
 	}
 
-	public Date getLefttime() {
+	public String getLefttime() {
 		return this.lefttime;
 	}
 
-	public void setLefttime(Date lefttime) {
+	public void setLefttime(String lefttime) {
 		this.lefttime = lefttime;
 	}
 
-	public User getDriver() {
-		return driver;
+	public String toString() {
+		return "Bus:" + this.id + this.user + this.name + this.createtime + this.description + this.maxpassager + this.type + this.purchasetime + this.lefttime;
 	}
 
-	public void setDriver(User driver) {
-		this.driver = driver;
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
 	}
 
-
-
+	public int hashCode() {
+		return this.id;
+	}
 }

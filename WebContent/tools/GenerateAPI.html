@@ -1,0 +1,79 @@
+<style>
+table{border:#000 1px solid;border-collapse:collapse;}
+td{border:#000 1px solid;}
+</style>
+<script language="javascript">
+
+/*
+/user/get	获取用户列表
+/user/add	增加用户
+/user/{userId}/get	获取用户详细信息
+/user/{userId}/update	修改用户信息
+/user/{userId}/delete	删除用户
+/user/login/	
+/user/logout/	
+*/
+
+
+var user,bus,station,line,role,event,eventtype;
+
+var common = new Array();
+common.push(new Array("$n/","get $n list","get","application/json","",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+common.push(new Array("$n/","add new $n","post","application/json","",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+common.push(new Array("$n/f/{number}/t/{number}","get $n list from number to number","get","application/json","",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+common.push(new Array("$n/{$nId}","get $n detail","get","application/json","",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+common.push(new Array("$n/{$nId}","update $n","put","application/json","",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+common.push(new Array("$n/{$nId}","delete $n","delete","application/json","",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+
+
+function API(name){
+	this.n = name;
+	this.__proto__ = common;
+	this.apis = new Array();
+}
+
+API.prototype.push = function(str){
+	this.apis.push(str);
+};
+
+user = new API("user");
+bus = new API("bus");
+station = new API("station");
+line = new API("line");
+role = new API("role");
+event = new API("event");
+eventtype = new API("eventtype");
+
+
+var apis = new Array();
+apis.push(user);
+apis.push(bus);
+apis.push(station);
+apis.push(line);
+apis.push(event);
+apis.push(eventtype);
+
+user.push(new Array("$n/login","user login in","post","application/json","{}",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+user.push(new Array("$n/logout","user logout","get","application/json","",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+user.push(new Array("$n/event","get user related events","get","application/json","",'{"status":"1,"data":{...}}','{ "status" : "4xx" ,"errorerror":"error msg"}'));
+
+
+document.write("<table>")
+var count = 0;
+for(var m in apis){
+	var obj = apis[m];
+	for(var i in obj){
+		if(i == "n" || i == "apis" || i == "length"){
+			
+		}else{
+			document.write("<tr><td>"+(count++)+"</td>");
+			for(var j in obj[i]){
+				document.write("<td>"+obj[i][j].replace("$n",obj["n"])+"</td>");
+			}
+			document.write("</tr>");
+		}
+		
+	}
+}
+document.write("</table>")
+</script>

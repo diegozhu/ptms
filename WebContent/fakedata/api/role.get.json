@@ -1,0 +1,6 @@
+[
+	{ "id" : "0001" , "name" : "user" , "createtime" : "2012-02-12 12:23:23" , "description" : "no dec"},
+	{ "id" : "0002" , "name" : "admin" , "createtime" : "2012-02-12 12:23:23" , "description" : "no dec"},
+	{ "id" : "0003" , "name" : "driver" , "createtime" : "2012-02-12 12:23:23" , "description" : "no dec"},
+	{ "id" : "0004" , "name" : "other" , "createtime" : "2012-02-12 12:23:23" , "description" : "no dec"}
+]

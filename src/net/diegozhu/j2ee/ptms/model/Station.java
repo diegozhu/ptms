@@ -1,40 +1,64 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
- 
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
- 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import java.util.Set;
+
+/**
+ * <br>
+ * table:station<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
+@Entity
+@Table(name = "Station", catalog = "ptms")
 public class Station implements java.io.Serializable {
- 
-    private static final long serialVersionUID = 9130852038635260030L;
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
-    @Column(name = "name")
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@Column(name = "name")
 	private String name;
-    @Column(name = "createtime")
+
+	@Column(name = "createtime")
 	private String createtime;
-    @Column(name = "description")
+
+	@Column(name = "description")
 	private String description;
-    @Column(name = "periority")
+
+	@Column(name = "periority")
 	private Integer periority;
-    @Column(name = "locationX")
+
+	@Column(name = "locationX")
 	private Double locationX;
-    @Column(name = "locationY")
+
+	@Column(name = "locationY")
 	private Double locationY;
-    @Column(name = "availble")
+
+	@Column(name = "availble")
 	private Boolean availble;
-	
 
-
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -94,5 +118,15 @@ public class Station implements java.io.Serializable {
 		this.availble = availble;
 	}
 
+	public String toString() {
+		return "Station:" + this.id + this.name + this.createtime + this.description + this.periority + this.locationX + this.locationY + this.availble;
+	}
 
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
+	}
+
+	public int hashCode() {
+		return this.id;
+	}
 }

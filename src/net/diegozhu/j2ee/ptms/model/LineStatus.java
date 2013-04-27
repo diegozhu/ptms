@@ -1,40 +1,57 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
- 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
- * LineStatus   */
+ * <br>
+ * table:line_status<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
+@Entity
+@Table(name = "LineStatus", catalog = "ptms")
 public class LineStatus implements java.io.Serializable {
- 
-    private static final long serialVersionUID = -5166407868072173794L;
-	private int id;
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@ManyToOne
+	@JoinColumn(name = "lineid")
 	private Line line;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "createtime")
 	private String createtime;
+
+	@Column(name = "description")
 	private String description;
+
+	@Column(name = "status")
 	private Integer status;
 
-	public LineStatus() {
-	}
-
-	public LineStatus(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	public LineStatus(int id, Line line, String name, String createtime,
-			String description, Integer status) {
-		this.id = id;
-		this.line = line;
-		this.name = name;
-		this.createtime = createtime;
-		this.description = description;
-		this.status = status;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -78,4 +95,15 @@ public class LineStatus implements java.io.Serializable {
 		this.status = status;
 	}
 
+	public String toString() {
+		return "LineStatus:" + this.id + this.line + this.name + this.createtime + this.description + this.status;
+	}
+
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
+	}
+
+	public int hashCode() {
+		return this.id;
+	}
 }

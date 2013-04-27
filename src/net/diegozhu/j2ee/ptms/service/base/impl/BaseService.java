@@ -2,6 +2,7 @@ package net.diegozhu.j2ee.ptms.service.base.impl;
 
 import java.io.Serializable;
 import java.util.List;
+
 import net.diegozhu.j2ee.ptms.dao.base.IBaseDao;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.service.base.IBaseService;
@@ -19,7 +20,7 @@ import net.diegozhu.j2ee.ptms.service.base.IBaseService;
  */
 public class BaseService<T, PK extends Serializable> implements IBaseService<T, PK> {
 
-	private IBaseDao<T, PK>	baseDao;
+	private IBaseDao<T, PK> baseDao;
 
 	public IBaseDao<T, PK> getBaseDao() {
 		return baseDao;
@@ -57,6 +58,11 @@ public class BaseService<T, PK extends Serializable> implements IBaseService<T, 
 	@Override
 	public T get(PK id) throws BaseException {
 		return baseDao.get(id);
+	}
+
+	@Override
+	public void delete(PK id) throws BaseException {
+		baseDao.delete(id);
 	}
 
 }

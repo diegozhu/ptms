@@ -1,50 +1,69 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
- 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
- * BusStatus   */
+ * <br>
+ * table:bus_status<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
+@Entity
+@Table(name = "BusStatus", catalog = "ptms")
 public class BusStatus implements java.io.Serializable {
- 
-    private static final long serialVersionUID = -5112063423210473842L;
-	private int id;
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@ManyToOne
+	@JoinColumn(name = "busid")
 	private Bus bus;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "createtime")
 	private String createtime;
+
+	@Column(name = "description")
 	private String description;
+
+	@Column(name = "wheelpressure")
 	private Integer wheelpressure;
+
+	@Column(name = "temperature")
 	private Integer temperature;
+
+	@Column(name = "gasleft")
 	private Integer gasleft;
+
+	@Column(name = "locationx")
 	private Double locationx;
+
+	@Column(name = "locationy")
 	private Double locationy;
 
-	public BusStatus() {
-	}
-
-	public BusStatus(int id, Bus bus, String name) {
-		this.id = id;
-		this.bus = bus;
-		this.name = name;
-	}
-
-	public BusStatus(int id, Bus bus, String name, String createtime,
-			String description, Integer wheelpressure, Integer temperature,
-			Integer gasleft, Double locationx, Double locationy) {
-		this.id = id;
-		this.bus = bus;
-		this.name = name;
-		this.createtime = createtime;
-		this.description = description;
-		this.wheelpressure = wheelpressure;
-		this.temperature = temperature;
-		this.gasleft = gasleft;
-		this.locationx = locationx;
-		this.locationy = locationy;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -120,4 +139,16 @@ public class BusStatus implements java.io.Serializable {
 		this.locationy = locationy;
 	}
 
+	public String toString() {
+		return "BusStatus:" + this.id + this.bus + this.name + this.createtime + this.description + this.wheelpressure + this.temperature + this.gasleft + this.locationx
+		        + this.locationy;
+	}
+
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
+	}
+
+	public int hashCode() {
+		return this.id;
+	}
 }

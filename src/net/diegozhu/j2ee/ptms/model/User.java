@@ -1,81 +1,77 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
 
-
-import java.util.Date;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import java.util.Set;
+
+/**
+ * <br>
+ * table:user<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
 @Entity
-@Table(name="User")
+@Table(name = "User", catalog = "ptms")
 public class User implements java.io.Serializable {
 
-    private static final long serialVersionUID = -3536129715928094603L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private int id;
-    @Column(name = "roleid")  
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@ManyToOne
+	@JoinColumn(name = "roleid")
 	private Role role;
-    @Column(name = "name")  
+
+	@Column(name = "name")
 	private String name;
-    @Column(name = "createtime") 
+
+	@Column(name = "createtime")
 	private String createtime;
-    @Column(name = "description") 
+
+	@Column(name = "description")
 	private String description;
-    @Column(name = "workid") 
-    private String workid;
-    @Column(name = "personalid") 
-    private String personalid;
-    @Column(name = "address") 
-    private String address;
-    @Column(name = "cellphone") 
-    private String cellphone;
-    @Column(name = "gender") 
-    private String gender;
-    @Column(name = "jointime") 
-    private Date jointime;
-    @Column(name = "resigntime") 
-    private Date resigntime;
-    
 
-    
-	public User() {
-	}
+	@Column(name = "workid")
+	private String workid;
 
-	public User(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+	@Column(name = "personalid")
+	private String personalid;
 
-	public User(int id, Role role, String name, String createtime,
-			String description, String workid, String personalid,
-			String address, String cellphone, String gender, Date jointime,
-			Date resigntime, Set<Events> eventses) {
-		this.id = id;
-		this.role = role;
-		this.name = name;
-		this.createtime = createtime;
-		this.description = description;
-		this.workid = workid;
-		this.personalid = personalid;
-		this.address = address;
-		this.cellphone = cellphone;
-		this.gender = gender;
-		this.jointime = jointime;
-		this.resigntime = resigntime;
-	}
+	@Column(name = "address")
+	private String address;
 
-	public int getId() {
+	@Column(name = "cellphone")
+	private String cellphone;
+
+	@Column(name = "gender")
+	private String gender;
+
+	@Column(name = "jointime")
+	private String jointime;
+
+	@Column(name = "resigntime")
+	private String resigntime;
+
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -151,19 +147,32 @@ public class User implements java.io.Serializable {
 		this.gender = gender;
 	}
 
-	public Date getJointime() {
+	public String getJointime() {
 		return this.jointime;
 	}
 
-	public void setJointime(Date jointime) {
+	public void setJointime(String jointime) {
 		this.jointime = jointime;
 	}
 
-	public Date getResigntime() {
+	public String getResigntime() {
 		return this.resigntime;
 	}
 
-	public void setResigntime(Date resigntime) {
+	public void setResigntime(String resigntime) {
 		this.resigntime = resigntime;
+	}
+
+	public String toString() {
+		return "User:" + this.id + this.role + this.name + this.createtime + this.description + this.workid + this.personalid + this.address + this.cellphone + this.gender
+		        + this.jointime + this.resigntime;
+	}
+
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
+	}
+
+	public int hashCode() {
+		return this.id;
 	}
 }

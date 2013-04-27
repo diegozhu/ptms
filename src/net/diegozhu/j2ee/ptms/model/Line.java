@@ -1,59 +1,61 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
- 
-import java.util.Date;
-import java.util.HashSet;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import java.util.Set;
 
 /**
- * Line   */
+ * <br>
+ * table:line<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
+@Entity
+@Table(name = "Line", catalog = "ptms")
 public class Line implements java.io.Serializable {
- 
-    private static final long serialVersionUID = 2035985403594421208L;
-	private int id;
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "createtime")
 	private String createtime;
+
+	@Column(name = "description")
 	private String description;
-	private Date timespace;
-	private Date starttime;
-	private Date endtime;
-	private Set<LineStation> lineStations = new HashSet<LineStation>(0);
-	private Set<LineStatus> lineStatuses = new HashSet<LineStatus>(0);
-	private Set<BusLine> busLines = new HashSet<BusLine>(0);
-	private Set<Events> eventses = new HashSet<Events>(0);
-	private Set<StationStatus> stationStatuses = new HashSet<StationStatus>(0);
 
-	public Line() {
-	}
+	@Column(name = "timespace")
+	private String timespace;
 
-	public Line(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
+	@Column(name = "starttime")
+	private String starttime;
 
-	public Line(int id, String name, String createtime, String description,
-			Date timespace, Date starttime, Date endtime,
-			Set<LineStation> lineStations, Set<LineStatus> lineStatuses,
-			Set<BusLine> busLines, Set<Events> eventses,
-			Set<StationStatus> stationStatuses) {
-		this.id = id;
-		this.name = name;
-		this.createtime = createtime;
-		this.description = description;
-		this.timespace = timespace;
-		this.starttime = starttime;
-		this.endtime = endtime;
-		this.lineStations = lineStations;
-		this.lineStatuses = lineStatuses;
-		this.busLines = busLines;
-		this.eventses = eventses;
-		this.stationStatuses = stationStatuses;
-	}
+	@Column(name = "endtime")
+	private String endtime;
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -81,68 +83,39 @@ public class Line implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Date getTimespace() {
+	public String getTimespace() {
 		return this.timespace;
 	}
 
-	public void setTimespace(Date timespace) {
+	public void setTimespace(String timespace) {
 		this.timespace = timespace;
 	}
 
-	public Date getStarttime() {
+	public String getStarttime() {
 		return this.starttime;
 	}
 
-	public void setStarttime(Date starttime) {
+	public void setStarttime(String starttime) {
 		this.starttime = starttime;
 	}
 
-	public Date getEndtime() {
+	public String getEndtime() {
 		return this.endtime;
 	}
 
-	public void setEndtime(Date endtime) {
+	public void setEndtime(String endtime) {
 		this.endtime = endtime;
 	}
 
-	public Set<LineStation> getLineStations() {
-		return this.lineStations;
+	public String toString() {
+		return "Line:" + this.id + this.name + this.createtime + this.description + this.timespace + this.starttime + this.endtime;
 	}
 
-	public void setLineStations(Set<LineStation> lineStations) {
-		this.lineStations = lineStations;
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
 	}
 
-	public Set<LineStatus> getLineStatuses() {
-		return this.lineStatuses;
+	public int hashCode() {
+		return this.id;
 	}
-
-	public void setLineStatuses(Set<LineStatus> lineStatuses) {
-		this.lineStatuses = lineStatuses;
-	}
-
-	public Set<BusLine> getBusLines() {
-		return this.busLines;
-	}
-
-	public void setBusLines(Set<BusLine> busLines) {
-		this.busLines = busLines;
-	}
-
-	public Set<Events> getEventses() {
-		return this.eventses;
-	}
-
-	public void setEventses(Set<Events> eventses) {
-		this.eventses = eventses;
-	}
-
-	public Set<StationStatus> getStationStatuses() {
-		return this.stationStatuses;
-	}
-
-	public void setStationStatuses(Set<StationStatus> stationStatuses) {
-		this.stationStatuses = stationStatuses;
-	}
-
 }

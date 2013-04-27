@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+        <meta http-equiv="Access-Control-Allow-Origin" content="*">
+        <title>Family</title>
+        <link rel="stylesheet" href="../../css/jquerymobile/jquery.mobile-1.2.0-alpha.1.min.css" />
+        <link rel="stylesheet" href="../../css/ptms.css" />
+        <script type="text/javascript" charset="utf-8" src="../../js/libs/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../../js/libs/jquery.mobile-1.2.0.min.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../../js/libs/knockout-2.2.1.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../../js/common/storage.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../../js/common/i18n.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../../js/ptms.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../../js/ptms.funcs.ajax.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../../js/ptms.obj.role.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../../js/ptms.obj.user.js"></script>
+        <script type="text/javascript" charset="utf-8" src="script.js"></script>
+    </head>
+    <body>
+        <div id="output" data-bind="foreach : users">
+			<span data-bind="text : name"></span>
+			<span data-bind="text : id"></span>
+			<span data-bind="text : address"></span>
+			<span data-bind="text : createtime"></span><br />
+		</div>
+    </body>
+</html>

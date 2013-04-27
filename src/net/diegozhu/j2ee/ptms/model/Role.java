@@ -1,39 +1,52 @@
+/*
+ * ptms
+ * Copyright (c) 2013 diegozhu All Rights Reserved.
+ */
 package net.diegozhu.j2ee.ptms.model;
- 
-import java.util.HashSet;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import java.util.Set;
 
+/**
+ * <br>
+ * table:role<br>
+ * @author diego zhu
+ * @version 1.0
+ */
+
+@Entity
+@Table(name = "Role", catalog = "ptms")
 public class Role implements java.io.Serializable {
- 
-    private static final long serialVersionUID = -8661452491926673184L;
-	private int id;
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	private Integer id;
+
+	@Column(name = "name")
 	private String name;
+
+	@Column(name = "createtime")
 	private String createtime;
+
+	@Column(name = "description")
 	private String description;
-	private Set<User> users = new HashSet<User>(0);
 
-	public Role() {
-	}
-
-	public Role(int id, String name) {
-		this.id = id;
-		this.name = name;
-	}
-
-	public Role(int id, String name, String createtime, String description,
-			Set<User> users) {
-		this.id = id;
-		this.name = name;
-		this.createtime = createtime;
-		this.description = description;
-		this.users = users;
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -61,12 +74,15 @@ public class Role implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Set<User> getUsers() {
-		return this.users;
+	public String toString() {
+		return "Role:" + this.id + this.name + this.createtime + this.description;
 	}
 
-	public void setUsers(Set<User> users) {
-		this.users = users;
+	public boolean equals(Object obj) {
+		return obj.hashCode() == this.hashCode();
 	}
 
+	public int hashCode() {
+		return this.id;
+	}
 }
