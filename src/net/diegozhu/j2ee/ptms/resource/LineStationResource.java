@@ -12,7 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.LineStation;
 import net.diegozhu.j2ee.ptms.service.ILineStationService;
@@ -26,12 +26,11 @@ import com.google.gson.Gson;
 /**
  * <br>
  * table:line_station<br>
- * 
  * @author diego zhu
  * @version 1.0
  */
 
-@Path("/lineStation")
+@Path("/LineStation")
 @Controller
 public class LineStationResource {
 
@@ -43,36 +42,50 @@ public class LineStationResource {
 	@GET
 	public String getAllLineStation() throws BaseException {
 		List<LineStation> list = LineStationService.loadAll();
-		return new Gson().toJson(list);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	@POST
 	public String addLineStation(String request) throws BaseException {
 		LineStation LineStation = ((new Gson()).fromJson(request, LineStation.class));
-		LineStation = LineStationService.add(LineStation);
 		logger.info("add LineStation:" + LineStation);
-		return new Gson().toJson(LineStation);
+		ResponseData rp = new ResponseData();
+		LineStation = LineStationService.add(LineStation);
+		rp.setStatus("ok");
+		rp.setData(LineStation);
+		return new Gson().toJson(rp);
 	}
 
 	@Path("/{LineStationId}/")
 	@GET
 	public String getLineStation(@PathParam("LineStationId") Integer LineStationId) throws BaseException {
-		return new Gson().toJson(LineStationService.get(LineStationId));
+		LineStation LineStation = LineStationService.get(LineStationId);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(LineStation);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{LineStationId}/")
 	@PUT
 	public String updateLineStation(String request) throws BaseException {
 		LineStation LineStation = ((new Gson()).fromJson(request, LineStation.class));
 		LineStationService.update(LineStation);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(LineStation);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{LineStationId}/")
-	@DELETE
+	@Path("/del/{LineStationId}/")
+	@GET
 	public String deleteLineStation(@PathParam("LineStationId") Integer LineStationId) throws BaseException {
 		LineStationService.delete(LineStationId);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		return new Gson().toJson(rp);
 	}
 
 	public ILineStationService getLineStationService() {

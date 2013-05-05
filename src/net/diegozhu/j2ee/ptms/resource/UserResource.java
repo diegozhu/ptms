@@ -6,7 +6,6 @@ package net.diegozhu.j2ee.ptms.resource;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -14,8 +13,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
+import net.diegozhu.j2ee.ptms.model.Events;
 import net.diegozhu.j2ee.ptms.model.User;
+import net.diegozhu.j2ee.ptms.service.IEventsService;
 import net.diegozhu.j2ee.ptms.service.IUserService;
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,7 @@ import com.google.gson.Gson;
  * @version 1.0
  */
 
-@Path("/user")
+@Path("/User")
 @Controller
 public class UserResource {
 
@@ -39,40 +41,98 @@ public class UserResource {
 
 	@Autowired
 	private IUserService UserService;
+	@Autowired
+	private IEventsService eventsService;
+
+	public IEventsService getEventsService() {
+		return eventsService;
+	}
+
+	public void setEventsService(IEventsService eventsService) {
+		this.eventsService = eventsService;
+	}
 
 	@GET
 	public String getAllUser() throws BaseException {
 		List<User> list = UserService.loadAll();
-		return new Gson().toJson(list);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	@POST
 	public String addUser(String request) throws BaseException {
 		User User = ((new Gson()).fromJson(request, User.class));
-		User = UserService.add(User);
+		ResponseData rp = new ResponseData();
+		String name = User.getName();
+		if (name == null || name == "") {
+			rp.setStatus("error");
+			rp.setCode(300);
+			return new Gson().toJson(rp);
+		}
+		if (name.length() > 45) {
+			rp.setStatus("error");
+			rp.setCode(301);
+			return new Gson().toJson(rp);
+		}
+
+		if (name.length() < 3) {
+			rp.setStatus("error");
+			rp.setCode(302);
+			return new Gson().toJson(rp);
+		}
+
 		logger.info("add User:" + User);
-		return new Gson().toJson(User);
+
+		User = UserService.add(User);
+		rp.setStatus("ok");
+		rp.setData(User);
+		return new Gson().toJson(rp);
 	}
 
 	@Path("/{UserId}/")
 	@GET
 	public String getUser(@PathParam("UserId") Integer UserId) throws BaseException {
-		return new Gson().toJson(UserService.get(UserId));
+		User User = UserService.get(UserId);
+		ResponseData rp = new ResponseData();
+		if (User == null) {
+			rp.setStatus("error");
+			rp.setCode(303);
+		} else {
+			rp.setStatus("ok");
+			rp.setData(User);
+		}
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{UserId}/")
 	@PUT
 	public String updateUser(String request) throws BaseException {
 		User User = ((new Gson()).fromJson(request, User.class));
 		UserService.update(User);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(User);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{UserId}/")
-	@DELETE
+	@Path("/del/{UserId}/")
+	@GET
 	public String deleteUser(@PathParam("UserId") Integer UserId) throws BaseException {
 		UserService.delete(UserId);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		return new Gson().toJson(rp);
+	}
+
+	@Path("{userId}/event/")
+	@GET
+	public String getEvents(@PathParam("userId") String UserId) throws BaseException {
+		List<Events> list = eventsService.getByField("userid", UserId);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	public IUserService getUserService() {

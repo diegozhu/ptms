@@ -54,6 +54,9 @@ public class Station implements java.io.Serializable {
 	@Column(name = "availble")
 	private Boolean availble;
 
+	@Column(name = "deleted")
+	private Boolean deleted;
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -118,8 +121,16 @@ public class Station implements java.io.Serializable {
 		this.availble = availble;
 	}
 
+	public Boolean getDeleted() {
+		return this.deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public String toString() {
-		return "Station:" + this.id + this.name + this.createtime + this.description + this.periority + this.locationX + this.locationY + this.availble;
+		return "Station:" + this.id + this.name + this.createtime + this.description + this.periority + this.locationX + this.locationY + this.availble + this.deleted;
 	}
 
 	public boolean equals(Object obj) {

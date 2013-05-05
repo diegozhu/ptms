@@ -2,17 +2,12 @@ var ptms = {};
 
 ptms.debug = false;
 
-ptms.url = function(obj){
-	
-	var api = obj.url;
-	var host = ptms.debug ? "../../fakedata/api/" : "http://localhost:8080/ptms/api/";
-	
-	obj.cache = obj.cache || false;
-	obj.async = obj.async || false;
-    obj.contentType = "text/plain";
-	
-	obj.url = host + api +  ( ptms.debug ? "." + obj.type + ".json" : "");
-	
-	console.log(obj.url);
-	
+Object.prototype.toString = function(){
+	return JSON.stringify(this);
+}
+
+// for new Object , if the arg is an Object , constructor will just return ,
+//	so , we create a new Object by JSON not by new Object() 
+ptms.clone = function(obj){
+	return JSON.parse(JSON.stringify(obj));
 }

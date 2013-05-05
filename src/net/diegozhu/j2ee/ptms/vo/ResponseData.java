@@ -1,53 +1,35 @@
 package net.diegozhu.j2ee.ptms.vo;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+public class ResponseData {
 
-import net.diegozhu.j2ee.ptms.utils.StatusMessage;
+	String status = "ok";
 
-@XmlAccessorType(XmlAccessType.FIELD)
-public class ResponseData<T> {
+	int code = 00;
 
-    @XmlElement(name = "status", required = true)
-    private int status;
+	Object data = "";
 
-    @XmlElement(name = "data", nillable = false)
-    private T data;
+	public String getStatus() {
+		return status;
+	}
 
-    @XmlElement(name = "error", nillable = false)
-    private String error;
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public ResponseData() {
-        this.status = StatusMessage.SUCCESS_CODE;
-    }
+	public int getCode() {
+		return code;
+	}
 
-    public ResponseData(int status) {
-        this.status = status;
-    }
+	public void setCode(int code) {
+		this.code = code;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public Object getData() {
+		return data;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public void setError(String error) {
-        this.error = error;
-    }
+	public void setData(Object data) {
+		this.data = data;
+	}
 
 }

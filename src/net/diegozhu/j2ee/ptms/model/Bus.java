@@ -58,6 +58,9 @@ public class Bus implements java.io.Serializable {
 	@Column(name = "lefttime")
 	private String lefttime;
 
+	@Column(name = "deleted")
+	private Boolean deleted;
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -130,8 +133,16 @@ public class Bus implements java.io.Serializable {
 		this.lefttime = lefttime;
 	}
 
+	public Boolean getDeleted() {
+		return this.deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public String toString() {
-		return "Bus:" + this.id + this.user + this.name + this.createtime + this.description + this.maxpassager + this.type + this.purchasetime + this.lefttime;
+		return "Bus:" + this.id + this.user + this.name + this.createtime + this.description + this.maxpassager + this.type + this.purchasetime + this.lefttime + this.deleted;
 	}
 
 	public boolean equals(Object obj) {

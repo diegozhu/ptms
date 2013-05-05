@@ -20,7 +20,7 @@ import net.diegozhu.j2ee.ptms.service.base.IBaseService;
  */
 public class BaseService<T, PK extends Serializable> implements IBaseService<T, PK> {
 
-	private IBaseDao<T, PK> baseDao;
+	protected IBaseDao<T, PK> baseDao;
 
 	public IBaseDao<T, PK> getBaseDao() {
 		return baseDao;
@@ -63,6 +63,12 @@ public class BaseService<T, PK extends Serializable> implements IBaseService<T, 
 	@Override
 	public void delete(PK id) throws BaseException {
 		baseDao.delete(id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> getByField(String field, String value) throws BaseException {
+		return baseDao.getByField(field, value);
 	}
 
 }

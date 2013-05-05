@@ -6,7 +6,6 @@ package net.diegozhu.j2ee.ptms.resource;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -16,6 +15,7 @@ import javax.ws.rs.PathParam;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.Eventtype;
 import net.diegozhu.j2ee.ptms.service.IEventtypeService;
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import com.google.gson.Gson;
  * @version 1.0
  */
 
-@Path("/eventtype")
+@Path("/Eventtype")
 @Controller
 public class EventtypeResource {
 
@@ -43,36 +43,49 @@ public class EventtypeResource {
 	@GET
 	public String getAllEventtype() throws BaseException {
 		List<Eventtype> list = EventtypeService.loadAll();
-		return new Gson().toJson(list);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	@POST
 	public String addEventtype(String request) throws BaseException {
 		Eventtype Eventtype = ((new Gson()).fromJson(request, Eventtype.class));
-		Eventtype = EventtypeService.add(Eventtype);
 		logger.info("add Eventtype:" + Eventtype);
-		return new Gson().toJson(Eventtype);
+		ResponseData rp = new ResponseData();
+		Eventtype = EventtypeService.add(Eventtype);
+		rp.setStatus("ok");
+		rp.setData(Eventtype);
+		return new Gson().toJson(rp);
 	}
 
 	@Path("/{EventtypeId}/")
 	@GET
 	public String getEventtype(@PathParam("EventtypeId") Integer EventtypeId) throws BaseException {
-		return new Gson().toJson(EventtypeService.get(EventtypeId));
+		Eventtype Eventtype = EventtypeService.get(EventtypeId);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(Eventtype);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{EventtypeId}/")
 	@PUT
 	public String updateEventtype(String request) throws BaseException {
 		Eventtype Eventtype = ((new Gson()).fromJson(request, Eventtype.class));
 		EventtypeService.update(Eventtype);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(Eventtype);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{EventtypeId}/")
-	@DELETE
+	@Path("/del/{EventtypeId}/")
 	public String deleteEventtype(@PathParam("EventtypeId") Integer EventtypeId) throws BaseException {
 		EventtypeService.delete(EventtypeId);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		return new Gson().toJson(rp);
 	}
 
 	public IEventtypeService getEventtypeService() {

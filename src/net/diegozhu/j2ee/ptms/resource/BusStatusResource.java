@@ -12,7 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.BusStatus;
 import net.diegozhu.j2ee.ptms.service.IBusStatusService;
@@ -26,12 +26,11 @@ import com.google.gson.Gson;
 /**
  * <br>
  * table:bus_status<br>
- * 
  * @author diego zhu
  * @version 1.0
  */
 
-@Path("/busStatus")
+@Path("/BusStatus")
 @Controller
 public class BusStatusResource {
 
@@ -43,36 +42,50 @@ public class BusStatusResource {
 	@GET
 	public String getAllBusStatus() throws BaseException {
 		List<BusStatus> list = BusStatusService.loadAll();
-		return new Gson().toJson(list);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	@POST
 	public String addBusStatus(String request) throws BaseException {
 		BusStatus BusStatus = ((new Gson()).fromJson(request, BusStatus.class));
-		BusStatus = BusStatusService.add(BusStatus);
 		logger.info("add BusStatus:" + BusStatus);
-		return new Gson().toJson(BusStatus);
+		ResponseData rp = new ResponseData();
+		BusStatus = BusStatusService.add(BusStatus);
+		rp.setStatus("ok");
+		rp.setData(BusStatus);
+		return new Gson().toJson(rp);
 	}
 
 	@Path("/{BusStatusId}/")
 	@GET
 	public String getBusStatus(@PathParam("BusStatusId") Integer BusStatusId) throws BaseException {
-		return new Gson().toJson(BusStatusService.get(BusStatusId));
+		BusStatus BusStatus = BusStatusService.get(BusStatusId);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(BusStatus);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{BusStatusId}/")
 	@PUT
 	public String updateBusStatus(String request) throws BaseException {
 		BusStatus BusStatus = ((new Gson()).fromJson(request, BusStatus.class));
 		BusStatusService.update(BusStatus);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(BusStatus);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{BusStatusId}/")
-	@DELETE
+	@Path("/del/{BusStatusId}/")
+	@GET
 	public String deleteBusStatus(@PathParam("BusStatusId") Integer BusStatusId) throws BaseException {
 		BusStatusService.delete(BusStatusId);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		return new Gson().toJson(rp);
 	}
 
 	public IBusStatusService getBusStatusService() {

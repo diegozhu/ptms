@@ -16,12 +16,13 @@ import javax.persistence.Table;
 /**
  * <br>
  * table:station_status<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
 
 @Entity
-@Table(name = "StationStatus", catalog = "ptms")
+@Table(name = "Station_Status", catalog = "ptms")
 public class StationStatus implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +30,7 @@ public class StationStatus implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private Integer id;
+	private int id;
 
 	@ManyToOne
 	@JoinColumn(name = "stationid")
@@ -53,11 +54,14 @@ public class StationStatus implements java.io.Serializable {
 	@Column(name = "status")
 	private int status;
 
-	public Integer getId() {
+	@Column(name = "deleted")
+	private Boolean deleted;
+
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -117,8 +121,16 @@ public class StationStatus implements java.io.Serializable {
 		this.status = status;
 	}
 
+	public Boolean getDeleted() {
+		return this.deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public String toString() {
-		return "StationStatus:" + this.id + this.station + this.name + this.createtime + this.description + this.trafficstatus + this.passagerstatus + this.status;
+		return "StationStatus:" + this.id + this.station + this.name + this.createtime + this.description + this.trafficstatus + this.passagerstatus + this.status + this.deleted;
 	}
 
 	public boolean equals(Object obj) {

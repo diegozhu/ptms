@@ -19,6 +19,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IBaseDao<T, PK extends Serializable> {
 
+	@SuppressWarnings("rawtypes")
+	public List getByField(String Field, String value) throws BaseException;
+
 	public T add(T t) throws BaseException;
 
 	public void delete(T t) throws BaseException;
@@ -32,5 +35,4 @@ public interface IBaseDao<T, PK extends Serializable> {
 	public List<T> loadAll() throws BaseException;
 
 	public void update(T t) throws BaseException;
-
 }

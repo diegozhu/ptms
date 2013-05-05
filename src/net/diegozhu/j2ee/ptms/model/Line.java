@@ -51,6 +51,9 @@ public class Line implements java.io.Serializable {
 	@Column(name = "endtime")
 	private String endtime;
 
+	@Column(name = "deleted")
+	private Boolean deleted;
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -107,8 +110,16 @@ public class Line implements java.io.Serializable {
 		this.endtime = endtime;
 	}
 
+	public Boolean getDeleted() {
+		return this.deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public String toString() {
-		return "Line:" + this.id + this.name + this.createtime + this.description + this.timespace + this.starttime + this.endtime;
+		return "Line:" + this.id + this.name + this.createtime + this.description + this.timespace + this.starttime + this.endtime + this.deleted;
 	}
 
 	public boolean equals(Object obj) {

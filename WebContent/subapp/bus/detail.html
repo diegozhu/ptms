@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>ptms</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<base href="."/>
+		<base target=""/>
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		  <script src="../../js/libs/html5shiv.js"></script>
+		<![endif]-->
+		<link href="../../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+		<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+		<link href="../../css/bootstrap/docs.css" rel="stylesheet">
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/jquery.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap-dropdown.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/knockout-2.2.1.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/common/storage.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/common/i18n.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.code.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.funcs.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.obj.js"></script>
+		
+		<script type="text/javascript" charset="utf-8" src="js/detail.js"></script>
+		<link href="css/detail.css" rel="stylesheet">
+    </head>
+    <body>
+		<span data-bind="text:id" ></span>:<span data-bind="text:data.bus.id"></span><br/>
+		<span data-bind="text:name" ></span>:<span data-bind="text:data.bus.name" ></span><br/>
+ 		<span data-bind="text:description"></span>:<span data-bind="text:data.bus.description" ></span><br/>
+		<span data-bind="text:maxpassager"></span>:<span data-bind="text:data.bus.maxpassager" ></span><br/>
+		<span data-bind="text:type"></span>:<span data-bind="text:data.bus.type" ></span><br/>
+		<span data-bind="text:purchasetime"></span>:<span data-bind="text:data.bus.purchasetime" ></span><br/>
+		<span data-bind="text:lefttime"></span>:<span data-bind="text:data.bus.lefttime" ></span><br/>
+		<span data-bind="text:driver"></span>:<span data-bind="text:data.bus.user.name" ></span><br/>
+		<span data-bind="text:createtime" ></span>:<span data-bind="text:data.bus.createtime"></span><br/>
+		<a class="btn btnback " data-bind="text : back" ></a>
+		<a class="btn" id="btnEidt" data-bind="text : edit" ></a>
+		<a class="btn" id="relatedEvents" data-bind="text : relatedEvents" ></a>
+		<a class="btn" id="relatedStatus" data-bind="text : relatedStatus" ></a>
+		<div class="dragdown"></div>
+    </body>
+</html>

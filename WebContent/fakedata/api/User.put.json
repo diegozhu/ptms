@@ -1,0 +1,21 @@
+{	
+	"status" : "ok",
+	"code" : "01",
+	"data" : {
+		"id" : "0004" ,
+		"name" : "朱海洋4" , 
+		"createtime" : "2012-12-14 08:09:24" ,
+		"description" : "no descript" , 
+		"workid" : "tp00089" , 
+		"personalid" : "2021122323223" ,
+		"address" : "玄武区卫岗1号" ,
+		"cellphone" : "18013585515" , 
+		"gender" : "0" ,
+		"jointime" : "2012-12-14 08:09:24" , 
+		"resigntime" : "2012-12-14 08:09:24" , 
+		"role" : {
+			"id" : "0001",
+			"name" : "user"
+		}
+	}
+}

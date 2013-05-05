@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>ptms</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<base href="."/>
+		<base target=""/>
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		<script src="../../js/libs/html5shiv.js"></script>
+		<![endif]-->
+		<link href="../../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+		<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+		<link href="../../css/bootstrap/docs.css" rel="stylesheet">
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/jquery.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/knockout-2.2.1.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/common/storage.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/common/i18n.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.code.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.funcs.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.obj.js"></script>
+		
+		<script type="text/javascript" charset="utf-8" src="js/add.js"></script>
+		<link href="css/detail.css" rel="stylesheet">
+	</head>
+ <body>
+		<span data-bind="text:name" ></span>:<input type="text" id="input-name" data-bind="attr :{ 'value' :data.name }"/><br />
+		<span data-bind="text:description"></span>:<textarea rows="3"id="input-description" data-bind="text :data.description"> </textarea><br />
+		<span data-bind="text:user"></span>:
+		<span class="dropdown" id="userList">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="attr:{'user-id':data.users[0].id},text:data.users[0].name" id="events_user"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.users">
+				<li role="presentation"><a role="menuitem" href="javascript:void(0)" tabindex="-1" data-bind="attr:{'user-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
+		<span data-bind="text:line"></span>:
+		<span class="dropdown" id="lineList">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="attr:{'line-id':data.lines[0].id},text:data.lines[0].name" id="events_line"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.lines">
+				<li role="presentation"><a role="menuitem" href="javascript:void(0)" tabindex="-1" data-bind="attr:{'line-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
+		<span data-bind="text:bus"></span>:
+		<span class="dropdown" id="busList">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="attr:{'bus-id':data.buses[0].id},text:data.buses[0].name" id="events_bus"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.buses">
+				<li role="presentation"><a role="menuitem" href="javascript:void(0)" tabindex="-1" data-bind="attr:{'bus-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
+		<span data-bind="text:station"></span>:
+		<span class="dropdown" id="stationList">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="attr:{'station-id':data.stations[0].id},text:data.stations[0].name" id="events_station"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.stations">
+				<li role="presentation"><a role="menuitem" href="javascript:void(0)" tabindex="-1" data-bind="attr:{'station-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
+		<span data-bind="text:eventtype"></span>:
+		<span class="dropdown" id="eventtypeList">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="attr:{'eventtype-id':data.eventtypes[0].id},text:data.eventtypes[0].name" id="events_eventtype"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.eventtype">
+				<li role="presentation"><a role="menuitem" href="javascript:void(0)" tabindex="-1" data-bind="attr:{'eventtype-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
+		<a class="btn btnback" id="btnCancel" data-bind="text:cancel" ></a></span>
+		<a class="btn " id="btnAdd" data-bind="text :add" ></a>
+		<div class="dragdown"></div>
+ </body>
+</html>

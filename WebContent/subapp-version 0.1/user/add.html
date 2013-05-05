@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>ptms</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<base href="."/>
+		<base target=""/>
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		<script src="../../js/libs/html5shiv.js"></script>
+		<![endif]-->
+		<link href="../../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+		<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+		<link href="../../css/bootstrap/docs.css" rel="stylesheet">
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/jquery.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap-dropdown.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/knockout-2.2.1.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/common/storage.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/common/i18n.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.obj.role.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.obj.user.js"></script>
+		
+		<script type="text/javascript" charset="utf-8" src="js/add.js"></script>
+		<link href="css/detail.css" rel="stylesheet">
+	</head>
+ <body>
+		<form class="form-horizontal">
+			<span data-bind="text:name" ></span>:<input type="text" id="inputName"/><br/>
+			<span data-bind="text:description"></span>:<textarea rows="3" id="input-description"> </textarea><br/>
+			<span data-bind="text:workid"></span>:<input id="input-workid"/><br/>
+			<span data-bind="text:personalid"></span>:<input id="input-personalid"/><br/>
+			<span data-bind="text:address"></span>:<input id="input-address"/><br/>
+			<span data-bind="text:cellphone"></span>:<input id="input-cellphone"/><br/>
+			<span data-bind="text:jointime"></span>:<input rows="3" id="input-jointime"/><br/>
+			<span data-bind="text:gender"></span>:<label for="input-gender-male" data-bind="text :male"></label><input type="radio" name="input-gender" id="input-gender-male" checked/>
+			<label for="input-gender-female" data-bind="text:female"></label><input type="radio" name="input-gender" id="input-gender-female"/><br/>
+			<span data-bind="text:resigntime"></span>:<input rows="3" id="input-resigntime"/><br/>
+			<span data-bind="text:password"></span>:<input id="input-password"/><br/>
+			<span data-bind="text:passwordAgain"></span>:<input rows="3" id="input-passwordAgain"/><br/>
+			<span data-bind="text:role"></span>:
+				<span class="dropdown" id="roleList">	
+				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<span data-bind="attr:{'role-id':data.roles[0].id},text:data.roles[0].name" id="user_role"></span>
+				</a>
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.roles">
+					<li role="presentation"><a role="menuitem" tabindex="-1" onclick=roleListClick(this); data-bind="attr:{'role-id':id},text:name"></a></li>
+				</ul>
+				</span>
+			</span>
+		<br/>
+		<a class="btn btnback" id="btnCancel" data-bind="text :cancel" ></a></span>
+		<a class="btn" id="btnAdd" data-bind="text :add" ></a>
+		<div class="dragdown"></div>
+		</form>
+ </body>
+</html>

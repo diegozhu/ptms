@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>ptms</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<base href="." />
+		<base target="" />
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+		  <script src="../../js/libs/html5shiv.js"></script>
+		<![endif]-->
+		<link href="../../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+		<link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+		<link href="../../css/bootstrap/docs.css" rel="stylesheet">
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/jquery.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/libs/knockout-2.2.1.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/common/storage.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/common/i18n.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.code.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.funcs.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../../js/ptms.obj.js"></script>
+
+		<script type="text/javascript" charset="utf-8" src="script.js"></script>
+		<link href="style.css" rel="stylesheet">
+	</head>
+    <body>
+		<section class="page_section" id="page_section_add">
+			<span data-bind="text:name" ></span>:<input type="text" id="input-name" /><br />
+			<span data-bind="text:description"></span>:<textarea rows="3" id="input-description"></textarea><br />
+			<a class="btn btnCancel" data-bind="text : cancel" ></a></span>
+			<a class="btn btnAdd" data-bind="text : save" ></a>
+		</section>
+		<section class="page_section" id="page_section_edit">
+			<span data-bind="text:id" ></span>:<span data-bind="text:data.role.id"></span><br />
+			<span data-bind="text:name" ></span>:<input type="text" id="edit-name"  data-bind="attr : { 'value' : data.role.name }" /><br />
+			<span data-bind="text:description"></span>:<textarea rows="3" id="edit-description" data-bind="text : data.role.description"></textarea><br />
+			<span data-bind="text:createtime" ></span>:<span data-bind="text:data.role.createtime"></span><br />
+			<a class="btn btnCancel" data-bind="text : cancel" ></a></span>
+			<a class="btn btnSave" data-bind="text : save" ></a>
+		</section>
+		<section class="page_section" id="page_section_detail">
+			<span data-bind="text:id" ></span>:<span data-bind="text:data.role.id"></span><br />
+			<span data-bind="text:name" ></span>:<span data-bind="text:data.role.name"></span><br />
+			<span data-bind="text:description"></span>:<span data-bind="text:data.role.description" ></span><br />
+			<span data-bind="text:createtime" ></span>:<span data-bind="text:data.role.createtime"></span><br />
+			<a class="btn btnback" data-bind="text : back" ></a>
+			<a class="btn btnEidt" data-bind="text : edit" ></a>
+		</section>
+		<section class="page_section" id="page_section_list">
+			<ul class="nav nav-list bs-docs-sidenav affix" class="roles_list" data-bind="foreach:data.roles">
+				<li><a href="index.html#detail" data-bind="attr : { 'role-id' : id }">
+					<span data-bind="text:id"></span>
+					<span data-bind="text:name" ></span>
+					<span data-bind="text:createtime" ></span>
+				</a></li>
+			</ul>
+			<a class="btn" href="index.html#add" data-bind="text : add" ></a>
+		</section>
+    </body>
+</html>

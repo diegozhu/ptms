@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ptms</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<base href="." />
+	<base target="_blank" />
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../../js/libs/html5shiv.js"></script>
+    <![endif]-->
+	<link href="../../css/bootstrap/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../css/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="../../css/bootstrap/docs.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+	<script type="text/javascript" charset="utf-8" src="../../js/libs/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap-dropdown.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../js/libs/bootstrap/bootstrap-tab.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../js/libs/knockout-2.2.1.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../js/common/storage.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../js/common/i18n.js"></script>
+	<script type="text/javascript" charset="utf-8" src="../../js/ptms.js"></script>
+	<script src="script.js"></script>
+	<body>
+		<div class="container">
+			<div class="row"><div class="span12" id="logo"><h1 data-bind="text:appname"></h1></div></div>
+			<div class="row">
+				<div class="span12">			
+					<ul class="nav nav-tabs" id="myTab">
+					  <li class="active"><a href="#tab_role" data-toggle="tab"><span data-bind="text:role"></span></a></li>
+					  <li><a href="#tab_user" data-toggle="tab"><span data-bind="text:user"></span></a></li>
+					  <li><a href="#tab_bus" data-toggle="tab"><span data-bind="text:bus"></span></a></li>
+					  <li><a href="#tab_event" data-toggle="tab"><span data-bind="text:event"></span></a></li>
+					  <li><a href="#tab_configure" data-toggle="tab"><span data-bind="text:configure"></span></a></li>
+					  <li><a href="javascript:void(0);" id="changeLanguage" data-bind="text:changeLanguage"></a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="tab_role">...
+						tab_role
+						</div>
+						<div class="tab-pane" id="tab_user">...
+						tab_user
+						</div>
+						<div class="tab-pane" id="tab_bus">...
+						tab_bus
+						</div>
+						<div class="tab-pane" id="tab_event">...
+						tab_event...fasf
+						</div>
+						<div class="tab-pane" id="tab_configure">...
+						tab_configure
+						</div>
+					</div>					
+				</div>
+				
+				
+			</div>
+			
+			<div class="row">
+				<div class="span3 bs-docs-sidebar" id="side_nav">	
+					<ul class="nav nav-list bs-docs-sidenav affix">
+					  <li class="active"><a href="#" page="../role/list.html"><i class="icon-chevron-right"></i><span data-bind="text:role"></span></a></li>
+					  <li class=""><a href="#" page="../user/list.html"><i class="icon-chevron-right"></i><span data-bind="text:user"></span></a></li>
+					  <li class=""><a href="#" page="../bus/list.html"><i class="icon-chevron-right"></i><span data-bind="text:bus"></span></a></li>
+					  <li class=""><a href="#" page="../event/list.html"><i class="icon-chevron-right"></i><span data-bind="text:event"></span></a></li>
+					  <li class=""><a href="#" page="../eventtype/list.html"><i class="icon-chevron-right"></i><span data-bind="text:eventtype"></span></a></li>
+					  <li class=""><a href="#" page="../station/list.html"><i class="icon-chevron-right"></i><span data-bind="text:station"></span></a></li>
+					  <li class=""><a href="#" page="../line/list.html"><i class="icon-chevron-right"></i><span data-bind="text:line"></span></a></li>
+					  <li class=""><a href="#" page="../configure/list.html"><i class="icon-chevron-right"></i><span data-bind="text:configure"></span></a></li>
+					</ul>
+				</div>					
+				<div class="span8">	
+					<iframe id="pannel" src="../role/list.html">
+					</iframe>
+				</div>
+			</div>
+		</div>
+		
+		
+	</body>
+</html>

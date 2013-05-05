@@ -6,7 +6,6 @@ package net.diegozhu.j2ee.ptms.resource;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -16,6 +15,7 @@ import javax.ws.rs.PathParam;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.Role;
 import net.diegozhu.j2ee.ptms.service.IRoleService;
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import com.google.gson.Gson;
  * @version 1.0
  */
 
-@Path("/role")
+@Path("/Role")
 @Controller
 public class RoleResource {
 
@@ -43,36 +43,50 @@ public class RoleResource {
 	@GET
 	public String getAllRole() throws BaseException {
 		List<Role> list = RoleService.loadAll();
-		return new Gson().toJson(list);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	@POST
 	public String addRole(String request) throws BaseException {
 		Role Role = ((new Gson()).fromJson(request, Role.class));
-		Role = RoleService.add(Role);
 		logger.info("add Role:" + Role);
-		return new Gson().toJson(Role);
+		ResponseData rp = new ResponseData();
+		Role = RoleService.add(Role);
+		rp.setStatus("ok");
+		rp.setData(Role);
+		return new Gson().toJson(rp);
 	}
 
 	@Path("/{RoleId}/")
 	@GET
 	public String getRole(@PathParam("RoleId") Integer RoleId) throws BaseException {
-		return new Gson().toJson(RoleService.get(RoleId));
+		Role Role = RoleService.get(RoleId);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(Role);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{RoleId}/")
 	@PUT
 	public String updateRole(String request) throws BaseException {
 		Role Role = ((new Gson()).fromJson(request, Role.class));
 		RoleService.update(Role);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(Role);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{RoleId}/")
-	@DELETE
+	@Path("/del/{RoleId}/")
+	@GET
 	public String deleteRole(@PathParam("RoleId") Integer RoleId) throws BaseException {
 		RoleService.delete(RoleId);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		return new Gson().toJson(rp);
 	}
 
 	public IRoleService getRoleService() {

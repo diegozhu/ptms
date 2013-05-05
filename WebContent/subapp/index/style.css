@@ -1,0 +1,14 @@
+iframe{
+	border:#000 0px solid;
+	width:100%;
+	height:auto;
+}
+
+#pannel{
+	margin:30px auto auto 30px;
+	height:auto;
+}
+
+#side_nav{
+	margin-top:30px;
+}

@@ -12,7 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.Station;
 import net.diegozhu.j2ee.ptms.service.IStationService;
@@ -26,12 +26,11 @@ import com.google.gson.Gson;
 /**
  * <br>
  * table:station<br>
- * 
  * @author diego zhu
  * @version 1.0
  */
 
-@Path("/station")
+@Path("/Station")
 @Controller
 public class StationResource {
 
@@ -43,36 +42,50 @@ public class StationResource {
 	@GET
 	public String getAllStation() throws BaseException {
 		List<Station> list = StationService.loadAll();
-		return new Gson().toJson(list);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	@POST
 	public String addStation(String request) throws BaseException {
 		Station Station = ((new Gson()).fromJson(request, Station.class));
-		Station = StationService.add(Station);
 		logger.info("add Station:" + Station);
-		return new Gson().toJson(Station);
+		ResponseData rp = new ResponseData();
+		Station = StationService.add(Station);
+		rp.setStatus("ok");
+		rp.setData(Station);
+		return new Gson().toJson(rp);
 	}
 
 	@Path("/{StationId}/")
 	@GET
 	public String getStation(@PathParam("StationId") Integer StationId) throws BaseException {
-		return new Gson().toJson(StationService.get(StationId));
+		Station Station = StationService.get(StationId);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(Station);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{StationId}/")
 	@PUT
 	public String updateStation(String request) throws BaseException {
 		Station Station = ((new Gson()).fromJson(request, Station.class));
 		StationService.update(Station);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(Station);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{StationId}/")
-	@DELETE
+	@Path("/del/{StationId}/")
+	@GET
 	public String deleteStation(@PathParam("StationId") Integer StationId) throws BaseException {
 		StationService.delete(StationId);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		return new Gson().toJson(rp);
 	}
 
 	public IStationService getStationService() {

@@ -1,0 +1,27 @@
+button{
+	margin:20px auto auto 30px;
+}
+
+span{
+	line-height:50px;
+	margin-left:20px;
+}
+
+.btn{
+	margin-left:20px;
+}
+
+.dragdown{
+	display:block;
+	border:#000 0 solid;
+	visibility:hidden;
+	margin-top:150px;
+	clear:both;
+	float:none;
+	width:1px;
+	height:1px;
+}
+
+label{
+	display:inline-block;
+}

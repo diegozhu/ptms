@@ -16,12 +16,13 @@ import javax.persistence.Table;
 /**
  * <br>
  * table:line_status<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
 
 @Entity
-@Table(name = "LineStatus", catalog = "ptms")
+@Table(name = "Line_Status", catalog = "ptms")
 public class LineStatus implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -46,6 +47,9 @@ public class LineStatus implements java.io.Serializable {
 
 	@Column(name = "status")
 	private Integer status;
+
+	@Column(name = "deleted")
+	private Boolean deleted;
 
 	public Integer getId() {
 		return this.id;
@@ -95,8 +99,16 @@ public class LineStatus implements java.io.Serializable {
 		this.status = status;
 	}
 
+	public Boolean getDeleted() {
+		return this.deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public String toString() {
-		return "LineStatus:" + this.id + this.line + this.name + this.createtime + this.description + this.status;
+		return "LineStatus:" + this.id + this.line + this.name + this.createtime + this.description + this.status + this.deleted;
 	}
 
 	public boolean equals(Object obj) {

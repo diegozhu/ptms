@@ -1,108 +1,55 @@
-"global-lbName":"姓名",
-"global-lbTitle":"标题",
-"global-lbBack":"后退",
-"global-lbBirthday":"生日",
-"global-lbContent":"这里是内容",
-"global-lbSave":"保存",
-"global-lbEdit":"编辑",
-"global-lbAdd" :"添加",
-"global-lbDelete" :"删除",
-"global-lbCancel" :"取消",
-"global-lbConfirm" :"确认",
-"global-lbOk" :"确认",
-"global-lbLocation" :"所在地:",
-"global-lbJob" :"职业:", 
+//wesupportsinglelinecomments,notblockcommentslike/**/
+g-appname=Intell Public Traffic Managerment System
+//appnameforshort
+g-appnames=ptms
+g-role=role
+g-user=user
+g-back=back
+g-forward=forward
+g-click=click
+g-save=save
+g-edit=edit
+g-add=add
+g-delete=delete
+g-name=name
+g-cancel=cancel
+g-confirm=confirm
+g-ok=ok
+g-configure=configure
+g-bus=bus
+g-event=event
+g-id=id
+g-createtime=createtime
+g-description=description
+g-submit=submit
+g-peoplename=peoplename
+g-changeLanguage=中文
+g-workid=workid
+g-personalid=personalid
+g-address=address
+g-cellphone=cellphone
+g-gender=gender
+g-jointime=jointime
+g-resigntime=resigntime
+g-roleid=roleid
+g-password=password
+g-passwordAgain=passwordAgain 
+g-male=male
+g-female=female
+g-eventtype =eventtype
+g- station=station 
+g- line=line
 
-"i18NDemo-second":"点击切换到第二个页面",
-"i18NDemo-ntWelcome":"欢迎",
+station - periority = periority 
+station - location = location
+station - availble = availble
 
-"addFamilyView-addFamily":"添加家庭：",
-"addFamilyView-btnConfirm":"添加",
-"addFamilyView-familyName":"家庭名称：",
-"addFamilyView-phFillFamilyName":"填写名称：",
+line-timespace =timespace 
+line-starttime  =starttime  
+line-endtime  =endtime  
 
-"familyInitView-lbManageFamily" :"管理家庭" ,
-"familyInitView-lbMe" :"我",
-"familyInitView-ntNoFamilyInfo" :"没有家庭信息",
-    
-"showFamilyMemeberView-lbTitle" :"家庭成员", 
-
-
-"showFamilyMemeberView-lbOther" :"备注:",
-"showFamilyMemeberView-ntDisableAdmin" :"删除管理员身份",
-"showFamilyMemeberView-ntRemoveMember" :"移除家庭",
-"showFamilyMemeberView-ntRemoveMemberConfirm" :"将Ta分离出家庭后，Ta将不再是家庭成员。但会自动独立为一个新家庭，成为您家庭的友好家庭。",
-
-"settingView-lbTitle" :"add family member", 
-"settingView-lbOther" :"other:",
-"settingView-setting" :"设置",
-"settingView-back":"返回",
-"settingView-personalInfo" :"个人信息",
-"settingView-twoDimand":"二维码名片",
-"settingView-accountSetting":"账号设置",
-"settingView-commonSetting" :"通用设置",
-"settingView-privacySetting" :"隐私设置",
-"settingView-grade" :"评分",
-"settingView-feedbacking" :"意见反馈",
-"settingView-help":"帮助",
-"settingView-about":"关于Family",
-"settingView-logout":"退出登录",
-"settingView-save":"保存" ,
-"settingView-head":"头像" ,
-"settingView-name":"姓名" ,
-"settingView-sex":"性别" ,
-"settingView-male":"男" ,
-"settingView-female":"女" ,
-"settingView-birthday":"生日",
-"settingView-location":"所在地",
-"settingView-job":"职业",
-"settingView-remark":"个人备注",
-"settingView-email":"电子邮箱",
-"settingView-phone":"手机号码",
-"settingView-bind":"邦定",
-"settingView-unbind":"未绑定",
-"settingView-changePassword":"修改密码",
-"settingView-releaseBind":"解除手机绑定",
-"settingView-notice1":"解除匹配手机通讯录之后，您将无法直接调用本机的手机通讯录。解除绑定手机号码后，别人将无法通过通过手机号码查找到您。您也将不能使用手机号码直接登录Family，同时您所匹配的手机通讯录也将一并解除匹配。",
-"settingView-myPhone":"我的手机号:",
-"settingView-myPhoneNumber":"12345678910",
-"settingView-unMatchContact":"解除匹配手机通讯录",
-"settingView-reLeaseBindPhone":"解除绑定手机号码",
-"settingView-bindPhoneNumber":"绑定手机号码",
-"settingView-jumpOver":"跳过",
-"settingView-notice2":"为方便好友找到您，建议您绑定手机号码，您也可以选择跳过此步，暂不绑定。",
-"settingView-validation":"填写验证码",
-"settingView-notice3":"您的手机号码是：13587979621。我们给您发了一条短信，请将短信中的验证码数字填写在下方。",
-"settingView-next":"下一步",
-"settingView-currentPassword":"当前密码",
-"settingView-newPassword":"新密码",
-"settingView-newPasswordAgain":"确认密码",
-"settingView-contactSync":"手机通讯录同步",
-"settingView-on":"打开",
-"settingView-off":"关闭",
-"settingView-autoSavingPicture":"拍照自动保存到手机相册",
-"settingView-update":"版本更新",
-"settingView-messageRemind":"新消息提醒",
-"settingView-newNotice":"最新公告通知",
-"settingView-fontSize":"字体大小",
-"settingView-pravicySetting":"隐私设置",
-"settingView-checkBeforeAdd":"添加我时需要验证",
-"settingView-addWhenReplay":"回复即添加对方",
-"settingView-findMeByPhone":"通过手机号可搜索到我",
-"settingView-findMeByEmail":"通过电子邮箱可搜索到我",
-"settingView-findMeByWeChat":"通过微信号可搜索到我",
-"settingView-notice4":"感谢您对Family客户端的关注和支持，我们正在不断地努力，让您在Family获得更愉快的使用体验。您的宝贵意见将帮助我们不断进步，谢谢！",
-"settingView-send":"发送",
-"settingView-copyRight":" Family<br />Version 1.0.0<br />©群硕软件开发有限公司<br />",
-"settingView-copyRightInfo":"版权信息",
-"settingView-license":"软件许可使用协议",
-"settingView-special":"特别说明",
-"settingView-phValidation":"填写验证码",
-"settingView-phFillRemark":"请输入您的个人备注",
-"settingView-phFillJob":"请输入您的职业",
-"settingView-phFillLocation":"请输入您的所在地",
-"settingView-phFillName":"请输入姓名",
-"footerView-home":"首页",
-"footerView-familyMap":"家庭地图",
-"footerView-functions":"功能",
-"footerView-mine":"我的设置"
+bus - driver = driver
+bus - maxpassager = maxpassager 
+bus - lefttime = lefttime 
+bus - purchasetime = purchasetime 
+bus - type = type 

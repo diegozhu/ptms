@@ -6,7 +6,6 @@ package net.diegozhu.j2ee.ptms.resource;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -16,6 +15,7 @@ import javax.ws.rs.PathParam;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.Events;
 import net.diegozhu.j2ee.ptms.service.IEventsService;
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ import com.google.gson.Gson;
  * @version 1.0
  */
 
-@Path("/events")
+@Path("/Events")
 @Controller
 public class EventsResource {
 
@@ -43,36 +43,50 @@ public class EventsResource {
 	@GET
 	public String getAllEvents() throws BaseException {
 		List<Events> list = EventsService.loadAll();
-		return new Gson().toJson(list);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	@POST
 	public String addEvents(String request) throws BaseException {
 		Events Events = ((new Gson()).fromJson(request, Events.class));
-		Events = EventsService.add(Events);
 		logger.info("add Events:" + Events);
-		return new Gson().toJson(Events);
+		ResponseData rp = new ResponseData();
+		Events = EventsService.add(Events);
+		rp.setStatus("ok");
+		rp.setData(Events);
+		return new Gson().toJson(rp);
 	}
 
 	@Path("/{EventsId}/")
 	@GET
 	public String getEvents(@PathParam("EventsId") Integer EventsId) throws BaseException {
-		return new Gson().toJson(EventsService.get(EventsId));
+		Events Events = EventsService.get(EventsId);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(Events);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{EventsId}/")
 	@PUT
 	public String updateEvents(String request) throws BaseException {
 		Events Events = ((new Gson()).fromJson(request, Events.class));
 		EventsService.update(Events);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(Events);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{EventsId}/")
-	@DELETE
+	@Path("/del/{EventsId}/")
+	@GET
 	public String deleteEvents(@PathParam("EventsId") Integer EventsId) throws BaseException {
 		EventsService.delete(EventsId);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		return new Gson().toJson(rp);
 	}
 
 	public IEventsService getEventsService() {

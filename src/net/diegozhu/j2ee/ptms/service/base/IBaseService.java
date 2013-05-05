@@ -31,4 +31,5 @@ public interface IBaseService<T, PK extends Serializable> {
 
 	public void update(T t) throws BaseException;
 
+	public List<T> getByField(String field, String value) throws BaseException;
 }

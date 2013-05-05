@@ -42,6 +42,9 @@ public class Eventtype implements java.io.Serializable {
 	@Column(name = "description")
 	private String description;
 
+	@Column(name = "deleted")
+	private Boolean deleted;
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -74,8 +77,16 @@ public class Eventtype implements java.io.Serializable {
 		this.description = description;
 	}
 
+	public Boolean getDeleted() {
+		return this.deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public String toString() {
-		return "Eventtype:" + this.id + this.name + this.createtime + this.description;
+		return "Eventtype:" + this.id + this.name + this.createtime + this.description + this.deleted;
 	}
 
 	public boolean equals(Object obj) {

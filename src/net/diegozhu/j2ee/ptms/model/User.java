@@ -67,6 +67,9 @@ public class User implements java.io.Serializable {
 	@Column(name = "resigntime")
 	private String resigntime;
 
+	@Column(name = "password")
+	private String password;
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -163,9 +166,17 @@ public class User implements java.io.Serializable {
 		this.resigntime = resigntime;
 	}
 
+	public String getPassword() {
+		return this.password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String toString() {
 		return "User:" + this.id + this.role + this.name + this.createtime + this.description + this.workid + this.personalid + this.address + this.cellphone + this.gender
-		        + this.jointime + this.resigntime;
+		        + this.jointime + this.resigntime + this.password;
 	}
 
 	public boolean equals(Object obj) {

@@ -1,6 +1,7 @@
 package net.diegozhu.j2ee.ptms.dao.base.impl;
 
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -8,9 +9,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import net.diegozhu.j2ee.ptms.dao.base.IBaseDao;
+import net.diegozhu.j2ee.ptms.resource.BusLineResource;
 
-import org.hibernate.Session;
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -24,19 +28,18 @@ import org.springframework.stereotype.Repository;
  *            The primary key of the entity class
  */
 @Repository
-public abstract class BaseDao<T, PK extends Serializable> implements IBaseDao<T, PK> {
+public class BaseDao<T, PK extends Serializable> extends HibernateDaoSupport implements IBaseDao<T, PK> {
 
-	private Class<T> entityClass;
+	protected Class<T> entityClass;
 
-	private HibernateTemplate hibernateTemplate;
+	private String entityName = "";
 
-	public HibernateTemplate getHibernateTemplate() {
-		return hibernateTemplate;
-	}
+	private static Logger logger = Logger.getLogger(BusLineResource.class);
 
 	@Resource
-	public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
-		this.hibernateTemplate = hibernateTemplate;
+	public void setHTemplate(HibernateTemplate hibernateTemplate) {
+		this.setHibernateTemplate(hibernateTemplate);
+
 	}
 
 	/**
@@ -53,52 +56,80 @@ public abstract class BaseDao<T, PK extends Serializable> implements IBaseDao<T,
 
 	@Override
 	public T add(T t) {
-		hibernateTemplate.save(t);
+		this.getHibernateTemplate().save(t);
 		return t;
 	}
 
 	@Override
 	public void delete(T t) {
-		hibernateTemplate.delete(t);
+
+		try {
+
+			java.lang.reflect.Method m = t.getClass().getMethod("getDeleted", Boolean.TYPE);
+			m.invoke(t, true);
+
+		} catch (NoSuchMethodException e) {
+			logger.info(e);
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			logger.info(e);
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			logger.info(e);
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			logger.info(e);
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			logger.info(e);
+			e.printStackTrace();
+		}
+		this.getHibernateTemplate().update(t);
 	}
 
 	@Override
 	public void delete(PK id) {
-		hibernateTemplate.delete(id);
+		T t = this.get(id);
+		this.delete(t);
 	}
 
 	@Override
 	public T load(PK id) {
-		return hibernateTemplate.load(entityClass, id);
+		return this.getHibernateTemplate().load(entityClass, id);
+	}
+
+	@SuppressWarnings("rawtypes")
+	public List getByField(String Field, String value) {
+		String hql = "FROM " + this.entityName + " WHERE :field = :value";
+
+		Query query = this.getSession().createQuery(hql);
+
+		query.setString("field", Field);
+		query.setString("value", value);
+		return query.list();
+	}
+
+	public String getEntityName() {
+		return entityName;
+	}
+
+	public void setEntityName(String entityName) {
+		this.entityName = entityName;
 	}
 
 	@Override
 	public List<T> loadAll() {
-		return hibernateTemplate.loadAll(entityClass);
+		return this.getHibernateTemplate().loadAll(entityClass);
 	}
 
 	@Override
 	public void update(T t) {
-		hibernateTemplate.update(t);
+		this.getHibernateTemplate().update(t);
 	}
 
 	@Override
 	public T get(PK id) {
-		return hibernateTemplate.get(entityClass, id);
-	}
-
-	/**
-	 * If there is a session alive, we will use it instead of open an new
-	 * Session.
-	 * 
-	 * @return
-	 */
-	public Session getCurrentSession() {
-		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
-		if (session == null) {
-			session = hibernateTemplate.getSessionFactory().openSession();
-		}
-		return session;
+		return this.getHibernateTemplate().get(entityClass, id);
 	}
 
 }

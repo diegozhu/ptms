@@ -5,6 +5,7 @@ import net.diegozhu.j2ee.ptms.service.base.IBaseService;
 
 /**
  * EventsInterface.
+ * 
  * @author diegozhu.net
  */
 public interface IEventsService extends IBaseService<Events, Integer> {

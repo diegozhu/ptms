@@ -16,8 +16,10 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`role` (
   `name` VARCHAR(45) NOT NULL ,
   `createtime` VARCHAR(45) NULL DEFAULT NULL ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
+AUTO_INCREMENT = 31
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -39,6 +41,7 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`user` (
   `jointime` VARCHAR(45) NULL DEFAULT NULL ,
   `resigntime` VARCHAR(45) NULL DEFAULT NULL ,
   `roleid` INT(11) NULL DEFAULT NULL ,
+  `password` VARCHAR(45) NULL DEFAULT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `ur_roleid` (`roleid` ASC) ,
   CONSTRAINT `ur_roleid`
@@ -47,6 +50,7 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`user` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 16
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -60,19 +64,21 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`bus` (
   `name` VARCHAR(45) NOT NULL ,
   `createtime` VARCHAR(45) NULL DEFAULT NULL ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
-  `driver` INT(11) NULL DEFAULT NULL ,
+  `userid` INT(11) NULL DEFAULT NULL ,
   `maxpassager` INT(11) NULL DEFAULT NULL ,
   `type` VARCHAR(45) NULL DEFAULT NULL ,
   `purchasetime` VARCHAR(45) NULL DEFAULT NULL ,
   `lefttime` VARCHAR(45) NULL DEFAULT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) ,
-  INDEX `bususer` (`driver` ASC) ,
+  INDEX `bususer` (`userid` ASC) ,
   CONSTRAINT `bususer`
-    FOREIGN KEY (`driver` )
+    FOREIGN KEY (`userid` )
     REFERENCES `ptms`.`user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 6
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -89,8 +95,10 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`line` (
   `timespace` VARCHAR(45) NULL DEFAULT NULL ,
   `starttime` VARCHAR(45) NULL DEFAULT NULL ,
   `endtime` VARCHAR(45) NULL DEFAULT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
+AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -106,6 +114,7 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`bus_line` (
   `description` VARCHAR(45) NULL DEFAULT NULL ,
   `busid` INT(11) NOT NULL ,
   `lineid` INT(11) NOT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) ,
   INDEX `bus_id` (`busid` ASC) ,
   INDEX `line_id` (`lineid` ASC) ,
@@ -139,6 +148,7 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`bus_status` (
   `locationx` DOUBLE NULL DEFAULT NULL ,
   `locationy` DOUBLE NULL DEFAULT NULL ,
   `busid` INT(11) NOT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) ,
   INDEX `busid` (`busid` ASC) ,
   CONSTRAINT `busid`
@@ -147,6 +157,23 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`bus_status` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `ptms`.`eventtype`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `ptms`.`eventtype` ;
+
+CREATE  TABLE IF NOT EXISTS `ptms`.`eventtype` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(45) NOT NULL ,
+  `createtime` VARCHAR(45) NULL DEFAULT NULL ,
+  `description` VARCHAR(45) NULL DEFAULT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
+  PRIMARY KEY (`id`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 9
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -163,24 +190,11 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`station` (
   `periority` INT(11) NULL DEFAULT NULL ,
   `locationX` DOUBLE NULL DEFAULT NULL ,
   `locationY` DOUBLE NULL DEFAULT NULL ,
-  `availble` TINYINT(1) NULL DEFAULT NULL ,
+  `availble` TINYINT(1) NULL DEFAULT '1' ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `ptms`.`eventtype`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `ptms`.`eventtype` ;
-
-CREATE  TABLE IF NOT EXISTS `ptms`.`eventtype` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(45) NOT NULL ,
-  `createtime` VARCHAR(45) NULL DEFAULT NULL ,
-  `description` VARCHAR(45) NULL DEFAULT NULL ,
-  PRIMARY KEY (`id`) )
-ENGINE = InnoDB
+AUTO_INCREMENT = 15
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -194,30 +208,26 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`events` (
   `name` VARCHAR(45) NOT NULL ,
   `createtime` VARCHAR(45) NULL DEFAULT NULL ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
-  `userid` INT(11) NULL ,
+  `userid` INT(11) NULL DEFAULT NULL ,
   `busid` INT(11) NULL DEFAULT NULL ,
   `stationid` INT(11) NULL DEFAULT NULL ,
   `lineid` INT(11) NULL DEFAULT NULL ,
   `eventtypeid` INT(11) NOT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) ,
   INDEX `e_userid` (`userid` ASC) ,
   INDEX `e_busid` (`busid` ASC) ,
   INDEX `e_stationid` (`stationid` ASC) ,
   INDEX `e_lineid` (`lineid` ASC) ,
   INDEX `e_eventtypeid` (`eventtypeid` ASC) ,
-  CONSTRAINT `e_userid`
-    FOREIGN KEY (`userid` )
-    REFERENCES `ptms`.`user` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `e_busid`
     FOREIGN KEY (`busid` )
     REFERENCES `ptms`.`bus` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `e_stationid`
-    FOREIGN KEY (`stationid` )
-    REFERENCES `ptms`.`station` (`id` )
+  CONSTRAINT `e_eventtypeid`
+    FOREIGN KEY (`eventtypeid` )
+    REFERENCES `ptms`.`eventtype` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `e_lineid`
@@ -225,12 +235,18 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`events` (
     REFERENCES `ptms`.`line` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `e_eventtypeid`
-    FOREIGN KEY (`eventtypeid` )
-    REFERENCES `ptms`.`eventtype` (`id` )
+  CONSTRAINT `e_stationid`
+    FOREIGN KEY (`stationid` )
+    REFERENCES `ptms`.`station` (`id` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `e_userid`
+    FOREIGN KEY (`userid` )
+    REFERENCES `ptms`.`user` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
+AUTO_INCREMENT = 8
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -246,6 +262,7 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`line_station` (
   `description` VARCHAR(45) NULL DEFAULT NULL ,
   `lineid` INT(11) NOT NULL ,
   `stationid` INT(11) NOT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) ,
   INDEX `ls_lineid` (`lineid` ASC) ,
   INDEX `ls_stationid` (`stationid` ASC) ,
@@ -275,6 +292,7 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`line_status` (
   `description` VARCHAR(45) NULL DEFAULT NULL ,
   `lindeid` INT(11) NULL DEFAULT NULL ,
   `status` INT(11) NULL DEFAULT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) ,
   INDEX `lineid` (`lindeid` ASC) ,
   CONSTRAINT `lineid`
@@ -292,7 +310,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `ptms`.`station_status` ;
 
 CREATE  TABLE IF NOT EXISTS `ptms`.`station_status` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT ,
+  `id` INT(11) NOT NULL ,
   `name` VARCHAR(45) NOT NULL ,
   `createtime` VARCHAR(45) NULL DEFAULT NULL ,
   `description` VARCHAR(45) NULL DEFAULT NULL ,
@@ -300,6 +318,7 @@ CREATE  TABLE IF NOT EXISTS `ptms`.`station_status` (
   `passagerstatus` INT(11) NULL DEFAULT NULL ,
   `stationid` INT(11) NOT NULL ,
   `status` INT(11) NOT NULL ,
+  `deleted` TINYINT(1) NULL DEFAULT '0' ,
   PRIMARY KEY (`id`) ,
   INDEX `ss_stationid` (`stationid` ASC) ,
   CONSTRAINT `ss_stationid`

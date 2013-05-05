@@ -12,7 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.BusLine;
 import net.diegozhu.j2ee.ptms.service.IBusLineService;
@@ -26,12 +26,11 @@ import com.google.gson.Gson;
 /**
  * <br>
  * table:bus_line<br>
- * 
  * @author diego zhu
  * @version 1.0
  */
 
-@Path("/busLine")
+@Path("/BusLine")
 @Controller
 public class BusLineResource {
 
@@ -43,36 +42,50 @@ public class BusLineResource {
 	@GET
 	public String getAllBusLine() throws BaseException {
 		List<BusLine> list = BusLineService.loadAll();
-		return new Gson().toJson(list);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
 	}
 
 	@POST
 	public String addBusLine(String request) throws BaseException {
 		BusLine BusLine = ((new Gson()).fromJson(request, BusLine.class));
-		BusLine = BusLineService.add(BusLine);
 		logger.info("add BusLine:" + BusLine);
-		return new Gson().toJson(BusLine);
+		ResponseData rp = new ResponseData();
+		BusLine = BusLineService.add(BusLine);
+		rp.setStatus("ok");
+		rp.setData(BusLine);
+		return new Gson().toJson(rp);
 	}
 
 	@Path("/{BusLineId}/")
 	@GET
 	public String getBusLine(@PathParam("BusLineId") Integer BusLineId) throws BaseException {
-		return new Gson().toJson(BusLineService.get(BusLineId));
+		BusLine BusLine = BusLineService.get(BusLineId);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(BusLine);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{BusLineId}/")
 	@PUT
 	public String updateBusLine(String request) throws BaseException {
 		BusLine BusLine = ((new Gson()).fromJson(request, BusLine.class));
 		BusLineService.update(BusLine);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(BusLine);
+		return new Gson().toJson(rp);
 	}
 
-	@Path("/{BusLineId}/")
-	@DELETE
+	@Path("/del/{BusLineId}/")
+	@GET
 	public String deleteBusLine(@PathParam("BusLineId") Integer BusLineId) throws BaseException {
 		BusLineService.delete(BusLineId);
-		return "{ \"status\" : \"OK\" }";
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		return new Gson().toJson(rp);
 	}
 
 	public IBusLineService getBusLineService() {
