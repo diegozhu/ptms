@@ -52,6 +52,7 @@ public class RoleResource {
 	@POST
 	public String addRole(String request) throws BaseException {
 		Role Role = ((new Gson()).fromJson(request, Role.class));
+		Role.setId(null);
 		logger.info("add Role:" + Role);
 		ResponseData rp = new ResponseData();
 		Role = RoleService.add(Role);

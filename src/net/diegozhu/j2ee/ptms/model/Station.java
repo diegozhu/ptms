@@ -9,15 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import java.util.Set;
 
 /**
  * <br>
  * table:station<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -41,6 +38,10 @@ public class Station implements java.io.Serializable {
 
 	@Column(name = "description")
 	private String description;
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	@Column(name = "periority")
 	private Integer periority;
@@ -113,7 +114,7 @@ public class Station implements java.io.Serializable {
 		this.locationY = locationY;
 	}
 
-	public Boolean getAvailble() {
+	public boolean getAvailble() {
 		return this.availble;
 	}
 
@@ -121,11 +122,11 @@ public class Station implements java.io.Serializable {
 		this.availble = availble;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

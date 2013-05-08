@@ -5,7 +5,8 @@ model.data = {};
 $(function(){
 
 	model.data.bus = new ptms.Bus(local("bus"));
-	model.data.users = JSON.parse(local("users"));
+	model.data.users = ptms.User.getAll();
+	model.data.lines = ptms.Line.getAll();
 	
 	var bus = model.data.bus;	
 	
@@ -17,6 +18,10 @@ $(function(){
 		$("#bus_user").attr("user-id",$(this).attr('user-id')).html($(this).html());
 	});
 	
+	$("#lineList ul li a").on("click",function(e){
+		$("#bus_line").attr("line-id",$(this).attr('line-id')).html($(this).html());
+	});
+	
 	$("#btnSave").click(function(e){
 		bus.name = $("#input-name").val();
 		bus.description = $("#input-description").val();
@@ -25,12 +30,18 @@ $(function(){
 		bus.purchasetime = $("#input-purchasetime").val();
 		bus.lefttime = $("#input-lefttime").val();
 		bus.user = new ptms.User({id:$("#bus_user").attr("user-id")});
+		bus.line = new ptms.Line({id:$("#bus_line").attr("line-id")});
 
 		try{
-			bus.update();
-			ptms.success("update ok!");
-			local.one("bus-id",bus.id);
-			window.history.back();
+			var res = bus.checkFields();
+			if(res.res){
+				bus.update();
+				ptms.success("update ok!");
+				local.one("bus-id",bus.id);
+				window.history.back();
+			}else{
+				ptms.alert(res.msg);
+			}
 		}catch(e){
 			ptms.error(e);
 		}		

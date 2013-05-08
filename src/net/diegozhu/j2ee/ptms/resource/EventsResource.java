@@ -40,6 +40,16 @@ public class EventsResource {
 	@Autowired
 	private IEventsService EventsService;
 
+	@Path("/c/{Catogray}/")
+	@GET
+	public String getEventsCatogray(@PathParam("Catogray") String Catogray) throws BaseException {
+		List<Events> list = EventsService.getByCatogray(Catogray);
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
+	}
+
 	@GET
 	public String getAllEvents() throws BaseException {
 		List<Events> list = EventsService.loadAll();
@@ -53,6 +63,7 @@ public class EventsResource {
 	public String addEvents(String request) throws BaseException {
 		Events Events = ((new Gson()).fromJson(request, Events.class));
 		logger.info("add Events:" + Events);
+		Events.setId(null);
 		ResponseData rp = new ResponseData();
 		Events = EventsService.add(Events);
 		rp.setStatus("ok");

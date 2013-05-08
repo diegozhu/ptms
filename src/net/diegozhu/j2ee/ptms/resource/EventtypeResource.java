@@ -54,6 +54,7 @@ public class EventtypeResource {
 		Eventtype Eventtype = ((new Gson()).fromJson(request, Eventtype.class));
 		logger.info("add Eventtype:" + Eventtype);
 		ResponseData rp = new ResponseData();
+		Eventtype.setId(null);
 		Eventtype = EventtypeService.add(Eventtype);
 		rp.setStatus("ok");
 		rp.setData(Eventtype);
@@ -81,6 +82,7 @@ public class EventtypeResource {
 	}
 
 	@Path("/del/{EventtypeId}/")
+	@GET
 	public String deleteEventtype(@PathParam("EventtypeId") Integer EventtypeId) throws BaseException {
 		EventtypeService.delete(EventtypeId);
 		ResponseData rp = new ResponseData();

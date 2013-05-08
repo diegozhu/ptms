@@ -2,6 +2,7 @@ package net.diegozhu.j2ee.ptms.service.base;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 
@@ -32,4 +33,6 @@ public interface IBaseService<T, PK extends Serializable> {
 	public void update(T t) throws BaseException;
 
 	public List<T> getByField(String field, String value) throws BaseException;
+
+	public List<T> getByFields(Map<String, String> map) throws BaseException;
 }

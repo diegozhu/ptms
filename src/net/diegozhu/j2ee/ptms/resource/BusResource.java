@@ -61,10 +61,21 @@ public class BusResource {
 		return new Gson().toJson(rp);
 	}
 
+	@Path("/free/")
+	@GET
+	public String getFreeBus() throws BaseException {
+		List<Bus> list = BusService.getFreeBuses();
+		ResponseData rp = new ResponseData();
+		rp.setStatus("ok");
+		rp.setData(list);
+		return new Gson().toJson(rp);
+	}
+
 	@POST
 	public String addBus(String request) throws BaseException {
 		Bus Bus = ((new Gson()).fromJson(request, Bus.class));
 		logger.info("add Bus:" + Bus);
+		Bus.setId(null);
 		ResponseData rp = new ResponseData();
 		Bus = BusService.add(Bus);
 		rp.setStatus("ok");

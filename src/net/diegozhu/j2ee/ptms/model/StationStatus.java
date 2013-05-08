@@ -30,11 +30,15 @@ public class StationStatus implements java.io.Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@ManyToOne
 	@JoinColumn(name = "stationid")
 	private Station station;
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	@Column(name = "name")
 	private String name;
@@ -52,16 +56,16 @@ public class StationStatus implements java.io.Serializable {
 	private Integer passagerstatus;
 
 	@Column(name = "status")
-	private int status;
+	private Integer status;
 
 	@Column(name = "deleted")
 	private Boolean deleted;
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -113,19 +117,19 @@ public class StationStatus implements java.io.Serializable {
 		this.passagerstatus = passagerstatus;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

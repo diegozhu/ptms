@@ -16,6 +16,15 @@ $(function(){
 		local.one("role",model.data.role);
 		window.location = "edit.html";
 	});
+    
+    $("#btnDelete").click(function(e){
+        try{
+            ptms.Role.del(model.data.role.id);
+        }catch(e){
+            ptms.error(e);
+        }
+    });
+    
 	ptms.commonInit();
 
 });

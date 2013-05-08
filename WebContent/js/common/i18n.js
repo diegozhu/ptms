@@ -15,7 +15,7 @@
         <script type="text/javascript" src="../../js/common/storage.js"></script>
 
     @init
-        i18n.init(callBackFunc);
+        i18n.init(viewUrl,lang,callBackFunc)
             @return this
 
     @howToAddYourOwnLanguageFile
@@ -43,7 +43,7 @@ var i18n;
     };
 
 
-    i18n.init = function(lang,callBackFunc){
+    i18n.init = function(viewUrl,lang,callBackFunc){
 		var href = (window.top == this) ? window.location.href : window.top.location.href;
 		var markIndex = href.indexOf("language=");
 		if(markIndex != -1){
@@ -53,6 +53,7 @@ var i18n;
 			}
 		}
 		i18n._language = lang || l || i18n._language;
+		i18n.viewModeUrl = viewUrl || i18n.viewModeUrl;
         if(!i18n.inited){
 			checkBeforeInit();
 			 //check localstorage first

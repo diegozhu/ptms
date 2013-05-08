@@ -16,6 +16,7 @@ import javax.persistence.Table;
 /**
  * <br>
  * table:events<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -30,6 +31,10 @@ public class Events implements java.io.Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
 	private Integer id;
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	@ManyToOne
 	@JoinColumn(name = "busid")
@@ -135,11 +140,11 @@ public class Events implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

@@ -17,4 +17,5 @@ public class LineStationDao extends BaseDao<LineStation, Integer> implements ILi
 		this.setEntityName("LineStation");
 
 	}
+
 }

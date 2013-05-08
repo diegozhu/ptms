@@ -24,5 +24,13 @@ $(function(){
 		local.one("bus-id",model.data.bus.id);
 		window.location = "../events/list.html"
 	});
+    
+     $("#btnDelete").click(function(e){
+        try{
+            ptms.Bus.del(model.data.bus.id);
+        }catch(e){
+            ptms.error(e);
+        }
+    });
 	ptms.commonInit();
 });

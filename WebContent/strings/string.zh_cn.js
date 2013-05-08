@@ -2,7 +2,7 @@
 g-appname=智能交通管理系统
 //appnameforshort
 g-appnames=系统
-g-role=用户角色
+g-role=员工类型
 g-user=用户
 g-back=后退
 g-forward=前进
@@ -10,7 +10,7 @@ g-click=点击
 g-save=保存
 g-edit=编辑
 g-add=添加
-g-delete=删除
+g-del=删除
 g-name=名称
 g-cancel=取消
 g-confirm=确认
@@ -54,7 +54,41 @@ bus - maxpassager = 载客量
 bus - lefttime = 有效期 
 bus - purchasetime = 购置期 
 bus - type = 类型 
-g - relatedStatus = relatedStatus
+g - relatedStatus = 车辆状态
 
-g - relatedEvents = relatedEvents
+g - relatedEvents = 车辆事件
 
+g- relatedBus  = 相关车辆
+g-corpmangement = 企业管理
+g-systemconfig= 企业信息
+g - eventmangement = 事件管理
+
+g- runninglog = 运营记录
+
+
+g-busstatus = 汽车状态
+g-stationstatus = 车站状态
+g-linestatus = 路线状态
+
+g-worker = 员工
+
+g-busevent= 车辆事件
+g-userevent=人员事件
+g-lineevent=路线事件
+g-stationevent=站点事件
+
+g-status = status
+g-wheelpressure = wheelpressure
+g-temperature = temperature
+g-gasleft = gasleft
+g-locationx = locationx
+g-locationy = locationy
+
+g-passagerstatus = passagerstatus
+g-trafficstatus = trafficstatus
+
+ 
+ g-monitor = monitor
+ 
+ g-relatedStation=relatedStation
+g-noinfor = noinfor

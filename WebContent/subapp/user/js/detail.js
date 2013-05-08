@@ -22,5 +22,13 @@ $(function(){
 		local.one("user-id",model.data.user.id);
 		window.location = "../events/list.html"
 	});
+    
+    $("#btnDelete").click(function(e){
+        try{
+            ptms.User.del(model.data.user.id);
+        }catch(e){
+            ptms.error(e);
+        }
+    });
 	ptms.commonInit();
 });

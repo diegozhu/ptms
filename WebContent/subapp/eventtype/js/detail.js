@@ -17,5 +17,13 @@ $(function(){
 		window.location = "edit.html";
 	});
 
+    
+    $("#btnDelete").click(function(e){
+        try{
+            ptms.Eventtype.del(model.data.eventtype.id);
+        }catch(e){
+            ptms.error(e);
+        }
+    });
 	ptms.commonInit();
 });

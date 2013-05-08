@@ -32,6 +32,10 @@ public class BusStatus implements java.io.Serializable {
 	@Column(name = "id")
 	private Integer id;
 
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "busid")
 	private Bus bus;
@@ -143,11 +147,11 @@ public class BusStatus implements java.io.Serializable {
 		this.locationy = locationy;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

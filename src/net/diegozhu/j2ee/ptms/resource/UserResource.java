@@ -77,12 +77,12 @@ public class UserResource {
 			return new Gson().toJson(rp);
 		}
 
-		if (name.length() < 3) {
+		if (name.length() < 2) {
 			rp.setStatus("error");
 			rp.setCode(302);
 			return new Gson().toJson(rp);
 		}
-
+		User.setId(null);
 		logger.info("add User:" + User);
 
 		User = UserService.add(User);
@@ -125,7 +125,7 @@ public class UserResource {
 		return new Gson().toJson(rp);
 	}
 
-	@Path("{userId}/event/")
+	@Path("{userId}/events/")
 	@GET
 	public String getEvents(@PathParam("userId") String UserId) throws BaseException {
 		List<Events> list = eventsService.getByField("userid", UserId);

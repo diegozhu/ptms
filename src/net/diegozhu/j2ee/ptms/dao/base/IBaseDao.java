@@ -2,6 +2,7 @@ package net.diegozhu.j2ee.ptms.dao.base;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 
@@ -35,4 +36,6 @@ public interface IBaseDao<T, PK extends Serializable> {
 	public List<T> loadAll() throws BaseException;
 
 	public void update(T t) throws BaseException;
+
+	public List<T> getByFields(Map<String, String> map) throws BaseException;
 }

@@ -9,15 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import java.util.Set;
 
 /**
  * <br>
  * table:line<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -38,6 +35,10 @@ public class Line implements java.io.Serializable {
 
 	@Column(name = "createtime")
 	private String createtime;
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	@Column(name = "description")
 	private String description;
@@ -110,11 +111,11 @@ public class Line implements java.io.Serializable {
 		this.endtime = endtime;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

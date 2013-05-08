@@ -43,6 +43,13 @@
 				<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)" data-bind="attr:{'user-id':id},text:name"></a></li>
 			</ul>
 		</span><br/>
+		<span data-bind="text:line"></span>:
+		<span class="dropdown" id="lineList">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span data-bind="attr:{'line-id':data.lines[0].id},text:data.lines[0].name" id="bus_line"></span></a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.lines">
+				<li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0)" data-bind="attr:{'line-id':id},text:name"></a></li>
+			</ul>
+		</span><br/>
 		<a class="btn btnback" id="btnCancel" data-bind="text :cancel" ></a></span>
 		<a class="btn" id="btnAdd" data-bind="text :add" ></a>
 		<div class="dragdown"></div>

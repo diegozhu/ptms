@@ -9,15 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import java.util.Set;
 
 /**
  * <br>
  * table:eventtype<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -35,6 +32,10 @@ public class Eventtype implements java.io.Serializable {
 
 	@Column(name = "name")
 	private String name;
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	@Column(name = "createtime")
 	private String createtime;
@@ -77,11 +78,11 @@ public class Eventtype implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

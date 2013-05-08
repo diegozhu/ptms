@@ -36,7 +36,20 @@
 		<span data-bind="text:endtime" ></span>:<span data-bind="text:data.line.endtime"></span><br />
 		<span data-bind="text:description"></span>:<span data-bind="text:data.line.description" ></span><br />
 		<span data-bind="text:createtime" ></span>:<span data-bind="text:data.line.createtime"></span><br />
-		<a class="btn btnback" data-bind="text : back" ></a>
+        <span data-bind="text:relatedStation" ></span>:
+        <ul class="nav nav-list bs-docs-sidenav affix" id="stations_list" data-bind="foreach:data.line.stations">
+			<li><a href="../station/detail.html" data-bind="attr : { 'line-id' : id }">
+				<span data-bind="text:name" ></span>
+			</a></li>
+		</ul>
+        <span data-bind="text:relatedBus" ></span>:
+        <ul class="nav nav-list bs-docs-sidenav affix" id="buses_list" data-bind="foreach:data.line.buses">
+			<li><a href="../bus/detail.html" data-bind="attr : { 'line-id' : id }">
+				<span data-bind="text:name" ></span>
+			</a></li>
+		</ul>
+		<a class="btn" href="list.html" id="btnDelete" data-bind="text : del" ></a>
+        <a class="btn btnback" data-bind="text : back" ></a>
 		<a class="btn" id="btnEidt" data-bind="text : edit" ></a>
     </body>
 </html>

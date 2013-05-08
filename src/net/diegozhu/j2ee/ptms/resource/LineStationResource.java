@@ -6,16 +6,16 @@ package net.diegozhu.j2ee.ptms.resource;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import net.diegozhu.j2ee.ptms.vo.ResponseData;
+
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.LineStation;
 import net.diegozhu.j2ee.ptms.service.ILineStationService;
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 /**
  * <br>
  * table:line_station<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -52,6 +53,7 @@ public class LineStationResource {
 	public String addLineStation(String request) throws BaseException {
 		LineStation LineStation = ((new Gson()).fromJson(request, LineStation.class));
 		logger.info("add LineStation:" + LineStation);
+		LineStation.setId(null);
 		ResponseData rp = new ResponseData();
 		LineStation = LineStationService.add(LineStation);
 		rp.setStatus("ok");

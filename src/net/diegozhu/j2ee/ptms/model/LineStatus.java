@@ -75,6 +75,10 @@ public class LineStatus implements java.io.Serializable {
 		this.name = name;
 	}
 
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public String getCreatetime() {
 		return this.createtime;
 	}
@@ -99,11 +103,11 @@ public class LineStatus implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

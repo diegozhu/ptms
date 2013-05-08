@@ -2,14 +2,17 @@ package net.diegozhu.j2ee.ptms.dao.base.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
 import net.diegozhu.j2ee.ptms.dao.base.IBaseDao;
-import net.diegozhu.j2ee.ptms.resource.BusLineResource;
+import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
@@ -34,7 +37,7 @@ public class BaseDao<T, PK extends Serializable> extends HibernateDaoSupport imp
 
 	private String entityName = "";
 
-	private static Logger logger = Logger.getLogger(BusLineResource.class);
+	private static Logger logger = Logger.getLogger(BaseDao.class);
 
 	@Resource
 	public void setHTemplate(HibernateTemplate hibernateTemplate) {
@@ -56,6 +59,25 @@ public class BaseDao<T, PK extends Serializable> extends HibernateDaoSupport imp
 
 	@Override
 	public T add(T t) {
+		try {
+			Method method = t.getClass().getMethod("setDeleted", Boolean.TYPE);
+			method.invoke(t, false);
+		} catch (NoSuchMethodException e) {
+			logger.info(e);
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			logger.info(e);
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			logger.info(e);
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			logger.info(e);
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			logger.info(e);
+			e.printStackTrace();
+		}
 		this.getHibernateTemplate().save(t);
 		return t;
 	}
@@ -65,7 +87,7 @@ public class BaseDao<T, PK extends Serializable> extends HibernateDaoSupport imp
 
 		try {
 
-			java.lang.reflect.Method m = t.getClass().getMethod("getDeleted", Boolean.TYPE);
+			java.lang.reflect.Method m = t.getClass().getMethod("setDeleted", Boolean.TYPE);
 			m.invoke(t, true);
 
 		} catch (NoSuchMethodException e) {
@@ -93,19 +115,34 @@ public class BaseDao<T, PK extends Serializable> extends HibernateDaoSupport imp
 		this.delete(t);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T load(PK id) {
-		return this.getHibernateTemplate().load(entityClass, id);
+		return (T) this.getByField("id", id.toString()).get(0);
 	}
 
 	@SuppressWarnings("rawtypes")
 	public List getByField(String Field, String value) {
-		String hql = "FROM " + this.entityName + " WHERE :field = :value";
+		String hql = "FROM " + this.entityName + " WHERE " + Field + " = :value and deleted != 1";
 
 		Query query = this.getSession().createQuery(hql);
 
-		query.setString("field", Field);
 		query.setString("value", value);
+		return query.list();
+	}
+
+	@SuppressWarnings("rawtypes")
+	public List getByFields(Map<String, String> map) throws BaseException {
+
+		String hql = "FROM " + this.entityName + " WHERE deleted != 1";
+		Set<String> keys = map.keySet();
+
+		for (String key : keys) {
+			hql += " AND " + key + " = " + map.get(key);
+		}
+
+		Query query = this.getSession().createQuery(hql);
+
 		return query.list();
 	}
 
@@ -117,9 +154,14 @@ public class BaseDao<T, PK extends Serializable> extends HibernateDaoSupport imp
 		this.entityName = entityName;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> loadAll() {
-		return this.getHibernateTemplate().loadAll(entityClass);
+		String hql = "FROM " + this.entityName + " WHERE deleted != 1";
+
+		Query query = this.getSession().createQuery(hql);
+
+		return query.list();
 	}
 
 	@Override

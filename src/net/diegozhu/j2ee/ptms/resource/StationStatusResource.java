@@ -6,16 +6,16 @@ package net.diegozhu.j2ee.ptms.resource;
 
 import java.util.List;
 
-import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import net.diegozhu.j2ee.ptms.vo.ResponseData;
+
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
 import net.diegozhu.j2ee.ptms.model.StationStatus;
 import net.diegozhu.j2ee.ptms.service.IStationStatusService;
+import net.diegozhu.j2ee.ptms.vo.ResponseData;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 /**
  * <br>
  * table:station_status<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -51,8 +52,10 @@ public class StationStatusResource {
 	@POST
 	public String addStationStatus(String request) throws BaseException {
 		StationStatus StationStatus = ((new Gson()).fromJson(request, StationStatus.class));
+		StationStatus.setId(null);
 		logger.info("add StationStatus:" + StationStatus);
 		ResponseData rp = new ResponseData();
+		StationStatus.setId(null);
 		StationStatus = StationStatusService.add(StationStatus);
 		rp.setStatus("ok");
 		rp.setData(StationStatus);

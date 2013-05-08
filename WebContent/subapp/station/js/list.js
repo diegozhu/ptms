@@ -4,8 +4,16 @@ model.data = {}
 
 $(function(){
 	
+    var line_id = local("line-id");
+    
 	try{
-		model.data.stations = ptms.Station.getAll();	
+        if(line_id != null){
+            var line = new pmts.Line({id:line_id});
+            model.data.stations = line.stations(); 
+        }else{
+            model.data.stations = ptms.Station.getAll();	
+        }
+		
 	}catch(e){
 		ptms.error(e);
 	}

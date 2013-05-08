@@ -13,11 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import java.util.Set;
-
 /**
  * <br>
  * table:user<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -69,6 +68,17 @@ public class User implements java.io.Serializable {
 
 	@Column(name = "password")
 	private String password;
+
+	@Column(name = "deleted")
+	private boolean deleted;
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	public Integer getId() {
 		return this.id;

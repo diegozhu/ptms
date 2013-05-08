@@ -9,19 +9,33 @@ $(function(){
 		var id = e.currentTarget.id;
 		id.replace("nav_","");
 		$(".nav li").removeClass("active");
+    	$("#pannel").attr("src",$(this).attr("page"));
 		$(e.currentTarget.parentElement).addClass("active");
 		return false;
 	});
 	
 	$("iframe").on("load",function(e){
-		this.style.height = e.currentTarget.contentDocument.height + 100 + "px";
+		this.style.height = e.currentTarget.contentDocument.height + 20 + "px";
 	});
 	
-	$('#myTab a').click(function (e) {
-	  e.preventDefault();
-	  $(this).tab('show');
-	})
 	
+	$("#side_nav li").hide();
+	$(".corpmangement").show();
+		
+	$("#myTab li a").click(function(e){
+		e.preventDefault();
+		var id = e.currentTarget.id;
+		$("#side_nav li").hide();
+		$("."+id).show();
+		if(id == "configure"){
+            $("#pannel").hide();
+        }else{
+             $("#pannel").show();
+            $("#pannel").attr("src",$($("."+id+" a")[0]).attr("page"));
+        }
+        
+	});
+
 	$("#change").click(function(){
 		i18n.setLanguage("en_us");
 		ko.applyBindings(i18n.model());
@@ -37,9 +51,5 @@ $(function(){
 			href = href + "?language=en_us";
 		}
 		window.location = href;
-	});
-	
-	$("#side_nav li a").click(function(e){
-		$("#pannel").attr("src",$(this).attr("page"));
 	});
 });

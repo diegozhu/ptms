@@ -16,5 +16,13 @@ $(function(){
 		local.one("events", model.data.events);
 		window.location = "edit.html";
 	});
+    
+     $("#btnDelete").click(function(e){
+        try{
+            ptms.Events.del(model.data.events.id);
+        }catch(e){
+            ptms.error(e);
+        }
+    });
 	ptms.commonInit();
 });

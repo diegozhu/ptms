@@ -2,6 +2,7 @@ package net.diegozhu.j2ee.ptms.service.base.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import net.diegozhu.j2ee.ptms.dao.base.IBaseDao;
 import net.diegozhu.j2ee.ptms.exception.base.BaseException;
@@ -69,6 +70,11 @@ public class BaseService<T, PK extends Serializable> implements IBaseService<T, 
 	@Override
 	public List<T> getByField(String field, String value) throws BaseException {
 		return baseDao.getByField(field, value);
+	}
+
+	@Override
+	public List<T> getByFields(Map<String, String> map) throws BaseException {
+		return baseDao.getByFields(map);
 	}
 
 }

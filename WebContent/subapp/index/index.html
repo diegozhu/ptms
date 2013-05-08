@@ -35,55 +35,48 @@
 			<div class="row">
 				<div class="span12">			
 					<ul class="nav nav-tabs" id="myTab">
-					  <li><a href="#tab_role" data-toggle="tab"><span data-bind="text:role"></span></a></li>
-					  <li><a href="#tab_user" data-toggle="tab"><span data-bind="text:user"></span></a></li>
-					  <li><a href="#tab_bus" data-toggle="tab"><span data-bind="text:bus"></span></a></li>
-					  <li><a href="#tab_events" data-toggle="tab"><span data-bind="text:event"></span></a></li>
-					  <li><a href="#tab_configure" data-toggle="tab"><span data-bind="text:configure"></span></a></li>
+					  <li><a href="javascript:void(0)" id="corpmangement" data-toggle="tab"><span data-bind="text:corpmangement"></span></a></li>
+					  <li><a href="javascript:void(0)" id="eventmangement" data-toggle="tab"><span data-bind="text:eventmangement"></span></a></li>
+					  <li><a href="javascript:void(0)" id="systemconfig" data-toggle="tab"><span data-bind="text:systemconfig"></span></a></li>
+					  <li><a href="javascript:void(0)" id="runninglog" data-toggle="tab"><span data-bind="text:runninglog"></span></a></li>
+					  <li><a href="javascript:void(0)" id="monitor" data-toggle="tab"><span data-bind="text:monitor"></span></a></li>
+					  <li><a href="javascript:void(0)" id="configure" data-toggle="tab"><span data-bind="text:configure"></span></a></li>
 					  <li class="active"><a href="javascript:void(0);" id="changeLanguage" data-bind="text:changeLanguage"></a></li>
 					</ul>
-					<div class="tab-content">
-						<div class="tab-pane active" id="tab_role">...
-						tab_role
+					
+					<div class="row">
+						<div class="span1 bs-docs-sidebar" id="side_nav">	
+							<ul class="nav nav-list bs-docs-sidenav">
+							  <li class="corpmangement"><a href="#" page="../user/list.html"><i class="icon-chevron-right"></i><span data-bind="text:worker"></span></a></li>
+							  <li class="corpmangement"><a href="#" page="../bus/list.html"><i class="icon-chevron-right"></i><span data-bind="text:bus"></span></a></li>
+							  <li class="corpmangement"><a href="#" page="../station/list.html"><i class="icon-chevron-right"></i><span data-bind="text:station"></span></a></li>
+							  <li class="corpmangement"><a href="#" page="../line/list.html"><i class="icon-chevron-right"></i><span data-bind="text:line"></span></a></li>
+							  							  
+							  <li class="eventmangement"><a href="#" page="../events/list.html?bus"><i class="icon-chevron-right"></i><span data-bind="text:busevent"></span></a></li>
+							  <li class="eventmangement"><a href="#" page="../events/list.html?user"><i class="icon-chevron-right"></i><span data-bind="text:userevent"></span></a></li>
+							  <li class="eventmangement"><a href="#" page="../events/list.html?line"><i class="icon-chevron-right"></i><span data-bind="text:lineevent"></span></a></li>
+							  <li class="eventmangement"><a href="#" page="../events/list.html?station"><i class="icon-chevron-right"></i><span data-bind="text:stationevent"></span></a></li>
+
+							  <li class="systemconfig"><a href="#" page="../role/list.html"><i class="icon-chevron-right"></i><span data-bind="text:role"></span></a></li>
+							  <li class="systemconfig"><a href="#" page="../eventtype/list.html"><i class="icon-chevron-right"></i><span data-bind="text:eventtype"></span></a></li>
+							  <li class="systemconfig"><a href="#" page="../configure/index.html"><i class="icon-chevron-right"></i><span data-bind="text:configure"></span></a></li>
+							  
+							  <li class="runninglog"><a href="#" page="../linestatus/list.html"><i class="icon-chevron-right"></i><span data-bind="text:linestatus"></span></a></li>
+							  <li class="runninglog"><a href="#" page="../stationstatus/list.html"><i class="icon-chevron-right"></i><span data-bind="text:stationstatus"></span></a></li>
+							  <li class="runninglog"><a href="#" page="../busstatus/list.html"><i class="icon-chevron-right"></i><span data-bind="text:busstatus"></span></a></li>
+                              
+                              <li class="monitor"><a href="#" page="../monitor/line.html"><i class="icon-chevron-right"></i><span data-bind="text:linestatus"></span></a></li>
+                              <li class="monitor"><a href="#" page="../monitor/station.html"><i class="icon-chevron-right"></i><span data-bind="text:stationstatus"></span></a></li>
+							  <li class="monitor"><a href="#" page="../monitor/bus.html"><i class="icon-chevron-right"></i><span data-bind="text:busstatus"></span></a></li>
+							</ul>
+						</div>					
+						<div class="span9 offset2">	
+							<iframe id="pannel"  frameborder=no width="100%" scrolling="no" height=100% src="../user/list.html">
+							</iframe>
 						</div>
-						<div class="tab-pane" id="tab_user">...
-						tab_user
-						</div>
-						<div class="tab-pane" id="tab_bus">...
-						tab_bus
-						</div>
-						<div class="tab-pane" id="tab_event">...
-						tab_event...fasf
-						</div>
-						<div class="tab-pane" id="tab_configure">...
-						tab_configure
-						</div>
-					</div>					
-				</div>
-				
-				
-			</div>
-			
-			<div class="row">
-				<div class="span1 bs-docs-sidebar" id="side_nav">	
-					<ul class="nav nav-list bs-docs-sidenav">
-					  <li class="active"><a href="#" page="../role/list.html"><i class="icon-chevron-right"></i><span data-bind="text:role"></span></a></li>
-					  <li class=""><a href="#" page="../user/list.html"><i class="icon-chevron-right"></i><span data-bind="text:user"></span></a></li>
-					  <li class=""><a href="#" page="../bus/list.html"><i class="icon-chevron-right"></i><span data-bind="text:bus"></span></a></li>
-					  <li class=""><a href="#" page="../events/list.html"><i class="icon-chevron-right"></i><span data-bind="text:event"></span></a></li>
-					  <li class=""><a href="#" page="../eventtype/list.html"><i class="icon-chevron-right"></i><span data-bind="text:eventtype"></span></a></li>
-					  <li class=""><a href="#" page="../station/list.html"><i class="icon-chevron-right"></i><span data-bind="text:station"></span></a></li>
-					  <li class=""><a href="#" page="../line/list.html"><i class="icon-chevron-right"></i><span data-bind="text:line"></span></a></li>
-					  <li class=""><a href="#" page="../configure/index.html"><i class="icon-chevron-right"></i><span data-bind="text:configure"></span></a></li>
-					</ul>
+					</div>			
 				</div>					
-				<div class="span9 offset2">	
-					<iframe id="pannel" src="../role/list.html">
-					</iframe>
-				</div>
-			</div>
-		</div>
-		
-		
+			</div>			
+		</div>		
 	</body>
 </html>

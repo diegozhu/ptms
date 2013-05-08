@@ -15,5 +15,9 @@ $(function(){
 	$("#lines_list li a").on("click",function(e){
 		local.one("line-id",$(this).attr("line-id"));
 	});
+	
+	$("#relatedBus").click(function(){
+		
+	});
 	ptms.commonInit();
 });

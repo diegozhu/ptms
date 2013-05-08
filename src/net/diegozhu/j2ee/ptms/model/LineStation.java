@@ -40,6 +40,10 @@ public class LineStation implements java.io.Serializable {
 	@JoinColumn(name = "lineid")
 	private Line line;
 
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	@Column(name = "name")
 	private String name;
 
@@ -100,11 +104,11 @@ public class LineStation implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

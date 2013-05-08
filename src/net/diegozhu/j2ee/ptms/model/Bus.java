@@ -13,11 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import java.util.Set;
-
 /**
  * <br>
  * table:bus<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -48,6 +47,22 @@ public class Bus implements java.io.Serializable {
 
 	@Column(name = "maxpassager")
 	private Integer maxpassager;
+
+	@ManyToOne
+	@JoinColumn(name = "lineId")
+	private Line line;
+
+	public Line getLine() {
+		return line;
+	}
+
+	public void setLine(Line line) {
+		this.line = line;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
+	}
 
 	@Column(name = "type")
 	private String type;
@@ -133,11 +148,11 @@ public class Bus implements java.io.Serializable {
 		this.lefttime = lefttime;
 	}
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return this.deleted;
 	}
 
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 

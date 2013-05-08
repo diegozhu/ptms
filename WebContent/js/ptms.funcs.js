@@ -86,7 +86,9 @@ ptms.ajax = function(apiObj){
 	}
 	//set default attribute
 	var obj = {};
-	var host = ptms.debug ? "../../fakedata/api/" : "http://localhost:8080/ptms/api/";
+	var host = 	ptms.debug ? "../../fakedata/api/" : "http://" + ptms.host 
+				+ (ptms.host[ptms.host.length -1 ] == "/" ? "" : "/")
+				+ "api/";
 	
 	obj.cache = apiObj.cache || false;
 	obj.async = apiObj.async || false;
@@ -144,6 +146,8 @@ ptms.ajax = function(apiObj){
 	
 	obj.data = JSON.stringify(obj.data);
 	
+    var nextUsingArgIndexInArguments = 1;  // just for args not from object : this;
+    
 	// handle patternArgs
 	for(var i in patternArgs){
 		var field = patternArgs[i].replace("{","").replace("}","");
@@ -158,7 +162,8 @@ ptms.ajax = function(apiObj){
 				pattern = pattern.replace(patternArgs[i],tmp);
 			}			
 		}else{
-			pattern = pattern.replace(patternArgs[i],arguments[parseInt(i)+1]);
+			pattern = pattern.replace(patternArgs[i],arguments[nextUsingArgIndexInArguments]);
+            nextUsingArgIndexInArguments ++;
 		}		
 	}
 	
@@ -235,19 +240,46 @@ ptms.generatConstructor = function(fields){
 		var result = true;
 		var msg = "";
 		for(fieldName in this){
-
+            if(fieldName == "id" || fieldName=="createtime"){
+                continue;
+            }
+			if(!this.hasOwnProperty(fieldName) || typeof this[fieldName] == "function"){
+				continue;
+			}
 			var fieldValue = this[fieldName];
 			var fieldDefination = fieldList[fieldName] || ptms.fields.obj[fieldName];
 			
 			if(fieldDefination == undefined){
-				msg += "\ncould not find field:"+fieldName+" in fieldDefination:"+fieldList;
+				msg += "\ncould not find fieldDefination:"+fieldName;
 				continue;
-			}
+			}else{
+                // value from input is always string
+                if(fieldDefination.type == Number){
+                    try{
+                        var value = parseFloat(fieldValue);
+                        if(isNaN(value)){
+                            result = false;
+                            msg += "\nvalue of field:"+fieldName+" not match field:"+fieldName+" should be "+ fieldDefination.type;
+                            break;
+                        }
+                    }catch(e){
+                        result = false;
+                        msg += "\nvalue of field:"+fieldName+" not match field:"+fieldName+" should be "+ fieldDefination.type;
+                        break;
+                    }
+                }else{
+                    if(! (fieldValue.constructor == fieldDefination.type)){
+                        result = false;
+                        msg += "\nvalue of field:"+fieldName+" not match field:"+fieldName+" should be "+ fieldDefination.type;
+                        break;
+                    }
+                }
+            }
 			
 			if(typeof fieldDefination.limit == "object"){
 			
 				if(fieldDefination.limit.max == undefined || fieldDefination.limit.max == undefined){
-					throw "unknow typeof limit defination , only support Array(emun) and object like { max : value , min : value } , defined in :" + fieldDefination;
+					throw "unknow typeof limit defination , only support Array(emun) and object like { max : value , min : value } , should be "+ fieldDefination.type;
 				}
 				
 				// for typeof number ,limit.max and limit.min treated as max value and min value;
@@ -255,11 +287,11 @@ ptms.generatConstructor = function(fields){
 				if(typeof fieldValue == "number"){
 					if(fieldValue > fieldDefination.limit.max){
 						result = false
-						msg += "\nvalue of:"+ fieldName +" is bigger than the max value defined in " + fieldDefination;
+						msg += "\nvalue of:"+ fieldName +" is bigger than the max:" + fieldDefination.limit.max;
 						break;
 					}else if(fieldValue < fieldDefination.limit.min){
 						result = false;
-						msg += "\nvalue of:"+ fieldName +" is smaller than the max value defined in " + fieldDefination;
+						msg += "\nvalue of:"+ fieldName +" is smaller than the min value:" + fieldDefination.limit.min;
 						break;
 					}else{
 						// value in limit, ok ,check next field;
@@ -268,18 +300,18 @@ ptms.generatConstructor = function(fields){
 				}else if(typeof fieldValue == "string"){
 					if(fieldValue.length > fieldDefination.limit.max){
 						result = false
-						msg += "\nvalue of:"+ fieldName +" is longger than the max length defined in " + fieldDefination;
+						msg += "\nvalue of:"+ fieldName +" is longger than the max length:"+fieldDefination.limit.max;
 						break;
 					}else if(fieldValue.length < fieldDefination.limit.min){
 						result = false;
-						msg += "\nvalue of:"+ fieldName +" is shorter than the max length defined in " + fieldDefination;
+						msg += "\nvalue of:"+ fieldName +" is shorter than the max length:"+fieldDefination.limit.min;
 						break;
 					}else{
 						// value in limit, ok ,check next field;
 						// do nothing;
 					}
 				}else{
-					msg += "\n field name:"+ fieldName+" could not be found in :" + fieldList + ptms.fields.obj;
+					msg += "\n field name:"+ fieldName+" could not be found in :" + ptms.getObj(fieldList) + " or "+ptms.getObj(ptms.fields.obj);
 				}
 			}else if(typeof fieldDefination.limit == "array"){
 				// check if the value is in the Array
@@ -292,16 +324,18 @@ ptms.generatConstructor = function(fields){
 				}
 				result = inArray ? true : false;
 				if(result == false){
-					msg += "value of:"+ fieldName +" is not in the given value array(emun) "+ array +" defined in " + fieldDefination;
+					msg += "value of:"+ fieldName +" is not in the given value array(emun) "+ ptms.getObj(array);
 				}else{
 					// do nothing , check next field , value in limit ok
 				}
+			}else if(typeof fieldDefination.limit == "undefined"){
+				// do nothing				
 			}else{
-				throw "unknow typeof limit defination , only support Array(emun) and {} , defined in :" + fieldDefination;
+				throw "unknow typeof limit defination , only support Array(emun) and {}";
 			}
 			
 		}
-			
+		
 		return { res : result , msg : msg};
 	}
 	

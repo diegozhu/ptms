@@ -36,6 +36,42 @@
 		<span data-bind="text:endtime" ></span>:<input type="text" id="input-endtime"  data-bind="attr : { 'value' : data.line.endtime }" /><br />
 		<span data-bind="text:description"></span>:<textarea rows="3" id="input-description" data-bind="text : data.line.description"></textarea><br />
 		<span data-bind="text:createtime" ></span>:<span data-bind="text:data.line.createtime"></span><br />
+        <span data-bind="text:station"></span>:
+		<span class="dropdown" id="mystations">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="text:del" id="line_station_del"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.mystations">
+				<li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" data-bind="attr:{'station-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
+        
+        <span class="dropdown" id="otherstations">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="text:add" id="line_station_add"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.otherstations">
+				<li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" data-bind="attr:{'station-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
+        <span data-bind="text:bus"></span>:
+		<span class="dropdown" id="mybuses">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="text:del" id="line_bus_del"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.mybuses">
+				<li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" data-bind="attr:{'bus-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
+        
+        <span class="dropdown" id="otherbuses">	
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+				<span data-bind="text:add" id="line_bus_add"></span>
+			</a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" data-bind="foreach :data.otherbuses">
+				<li role="presentation"><a href="javascript:void(0)" role="menuitem" tabindex="-1" data-bind="attr:{'bus-id':id},text:name"></a></li>
+			</ul>
+		</span><br />
 		<a class="btn btnback" id="btnCancel" data-bind="text : cancel" ></a></span>
 		<a class="btn" id="btnSave" data-bind="text : save" ></a>
     </body>

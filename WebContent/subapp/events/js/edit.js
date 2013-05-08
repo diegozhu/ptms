@@ -7,7 +7,6 @@ $(function(){
 	try{
 		model.data.events = new ptms.Events(local("events"));
 	
-		model.data.users = ptms.User.getAll()
 		model.data.users = ptms.User.getAll();
 		model.data.buses = ptms.Bus.getAll();
 		model.data.lines = ptms.Line.getAll();

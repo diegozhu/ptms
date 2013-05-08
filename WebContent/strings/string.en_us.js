@@ -53,3 +53,40 @@ bus - maxpassager = maxpassager
 bus - lefttime = lefttime 
 bus - purchasetime = purchasetime 
 bus - type = type 
+
+g - relatedStatus = relatedStatus
+
+g - relatedEvents = relatedEvents
+
+g- relatedBus  = relatedBus
+g-corpmangement = corpmangement
+g-systemconfig= systemconfig
+g - eventmangement = eventmangement
+
+g- runninglog = runninglog
+
+g-busstatus = statusbus
+g-stationstatus = statusstation
+g-linestatus = statusline
+
+g-worker = worker
+
+g-busevent=busevent
+g-userevent=userevent
+g-lineevent=lineevent
+g-stationevent=stationevent
+
+g-status=status;
+
+g-wheelpressure = wheelpressure
+g-temperature = temperature
+g-gasleft = gasleft
+g-locationx = locationx
+g-locationy = locationy
+
+g-passagerstatus = passagerstatus
+g-trafficstatus = trafficstatus
+
+g-monitor = monitor
+
+g-noinfor = noinfor

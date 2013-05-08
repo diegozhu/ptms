@@ -26,6 +26,7 @@ import com.google.gson.Gson;
 /**
  * <br>
  * table:line_status<br>
+ * 
  * @author diego zhu
  * @version 1.0
  */
@@ -52,6 +53,7 @@ public class LineStatusResource {
 	public String addLineStatus(String request) throws BaseException {
 		LineStatus LineStatus = ((new Gson()).fromJson(request, LineStatus.class));
 		logger.info("add LineStatus:" + LineStatus);
+		LineStatus.setId(null);
 		ResponseData rp = new ResponseData();
 		LineStatus = LineStatusService.add(LineStatus);
 		rp.setStatus("ok");

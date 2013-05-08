@@ -16,6 +16,14 @@ $(function(){
 		local.one("station",model.data.station);
 		window.location = "edit.html";
 	});
+    
+    $("#btnDelete").click(function(e){
+        try{
+            ptms.Station.del(model.data.station.id);
+        }catch(e){
+            ptms.error(e);
+        }
+    });
 	ptms.commonInit();
 
 });
